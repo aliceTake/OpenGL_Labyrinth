@@ -20,11 +20,12 @@ struct ConfigureDefine{
     int windowWidth;
     int windowHeight;
     GLfloat windowAspect;
+    GLfloat reverseWindowAspect;
     Size objectSize;
     
 public:
     ConfigureDefine()
-    : mode(0),squareArrayWidth(0),squareArrayHeight(0),windowWidth(0),windowHeight(0),windowAspect(0),objectSize(0,0){}
+    : mode(0),squareArrayWidth(0),squareArrayHeight(0),windowWidth(0),windowHeight(0),windowAspect(0),reverseWindowAspect(0),objectSize(0,0){}
     
     ConfigureDefine(int mode, int winWidth, int winHeight)
     : windowWidth(winWidth),windowHeight(winHeight),mode(mode)
@@ -43,11 +44,12 @@ public:
     
 private:
     void sizeCalculateSet(){
-        this->objectSize.width = 2.0f / this->squareArrayWidth;
-        this->objectSize.height = 2.0f / this->squareArrayHeight;
+        this->objectSize.width = 2.0f / GLfloat(this->squareArrayWidth);
+        this->objectSize.height = 2.0f / GLfloat(this->squareArrayHeight);
     }
     void setWindowAspect(){
         this->windowAspect = GLfloat(this->windowWidth) / GLfloat(this->windowHeight);
+        this->reverseWindowAspect = GLfloat(this->windowHeight) / GLfloat(this->windowWidth);
     }
     
 };

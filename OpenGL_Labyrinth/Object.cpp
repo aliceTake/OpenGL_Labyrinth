@@ -54,7 +54,7 @@ void SquareShape::createVbo() {
 
 void SquareShape::vertexInit()
 {
-    vertex.lowerLeft.x  = this->frame.position.x * WINDOW_ASPECT - WINDOW_ASPECT;// 1.78f;
+    vertex.lowerLeft.x  = this->frame.position.x * conf.windowAspect - conf.windowAspect; // WINDOW_ASPECT
     vertex.lowerLeft.y  = this->frame.position.y;
     
     vertex.lowerRight.x = vertex.lowerLeft.x + this->frame.size.width;
@@ -73,7 +73,7 @@ const GLfloat* SquareShape::getLocation() const { return location; }
 
 
 MultipleSquare::MultipleSquare(Frame f, ConfigureDefine conf)
-: aspectedWidth( f.size.width * REVERSE_WINDOW_ASPECT), SquareShape(f, conf) {  multipleVertexInit(); createpositionArrayVbo();}
+: aspectedWidth( f.size.width * conf.reverseWindowAspect), SquareShape(f, conf) {  multipleVertexInit(); createpositionArrayVbo();}
 
 void MultipleSquare::multipleVertexInit()
 {
@@ -122,16 +122,16 @@ void MultipleSquare::createpositionArrayVbo() {
 
 void MultipleSquare::positionArrayInit() {
     createStateData();
-    for (int h = 0; h < SQUARE_ARRAY_HEIGHT; h++){
-        for (int w = 0; w < SQUARE_ARRAY_WIDTH; w++){
-            this->positionArray[h][w].x = ((2.0f / (WINDOW_HEIGHT / (100 * this->frame.size.width))) * w + this->frame.position.x);
+    for (int h = 0; h < conf.squareArrayHeight; h++){
+        for (int w = 0; w < conf.squareArrayWidth; w++){
+            this->positionArray[h][w].x = ((2.0f / (conf.windowHeight / (100 * this->frame.size.width))) * w + this->frame.position.x);
             this->positionArray[h][w].y = (-1.0 + this->frame.size.height / 2 * h);
         }
     }
 }
 void MultipleSquare::stateInit() {
-    for (int h = 0; h < SQUARE_ARRAY_HEIGHT; h++){
-        for (int w = 0; w < SQUARE_ARRAY_WIDTH; w++){
+    for (int h = 0; h < conf.squareArrayHeight; h++){
+        for (int w = 0; w < conf.squareArrayWidth; w++){
             this->state[h][w] = 0.0;
         }
     }
@@ -139,8 +139,8 @@ void MultipleSquare::stateInit() {
 
 void MultipleSquare::createStateData() {
     stateInit();
-    for (int h = 0; h < SQUARE_ARRAY_HEIGHT; h++){
-        for (int w = 0; w < SQUARE_ARRAY_WIDTH; w++){
+    for (int h = 0; h < conf.squareArrayHeight; h++){
+        for (int w = 0; w < conf.squareArrayWidth; w++){
             if(h == 5 || h == 8 || w == 16 || (h == 9 && w == 3) || (h == 10 && (w == 0 || w == 1 || w == 2 || w == 3))) {
                 this->state[h][w] = 1.0;
             }
@@ -159,29 +159,26 @@ Position* MultipleSquare::getPositionArray(int h, int w) {
 Adv::Adv(Frame f, ConfigureDefine conf) : SquareShape(f,conf) {advPosi.x = 0.0f; advPosi.y = 0.0f;};
 
 void Adv::reloadPosition() {
-    const GLfloat width = 2.0f / SQUARE_ARRAY_WIDTH;
     
     advPosi.x = (this->frame.position.x + location[0]);
-    for(int j = 0; j < SQUARE_ARRAY_WIDTH; j++) {
-        if((width * j) - 1.0f <= advPosi.x && (width * j) - 1.0f + 0.0001f > advPosi.x){
+    for(int j = 0; j < conf.squareArrayWidth; j++) {
+        if((conf.objectSize.width * j) - 1.0f <= advPosi.x && (conf.objectSize.width * j) - 1.0f + 0.0001f > advPosi.x){
             arrayPosition[0] = j;
             break;
         }
-        else if((width * j) - 1.0f + 0.0001f <=  advPosi.x && (width * (j + 1.0f)) - 1.0f > advPosi.x) {
+        else if((conf.objectSize.width * j) - 1.0f + 0.0001f <=  advPosi.x && (conf.objectSize.width * (j + 1.0f)) - 1.0f > advPosi.x) {
             arrayPosition[0] = -j;
             break;
         }
     }
     
-    const GLfloat height = 2.0f / SQUARE_ARRAY_HEIGHT;
-    
     advPosi.y = (this->frame.position.y + location[1]) + 0.5f;
-    for(int i = 0; i < SQUARE_ARRAY_HEIGHT; i++) {
-        if(height * i - 1.0005f <= advPosi.y && height * i - 1.0f >= advPosi.y){
+    for(int i = 0; i < conf.squareArrayHeight; i++) {
+        if(conf.objectSize.height * i - 1.0005f <= advPosi.y && conf.objectSize.height * i - 1.0f >= advPosi.y){
             arrayPosition[1] = i;
             break;
         }
-        else if(height * i - 1.0f < advPosi.y && height * (i + 1) - 1.0005f > advPosi.y) {
+        else if(conf.objectSize.height * i - 1.0f < advPosi.y && conf.objectSize.height * (i + 1) - 1.0005f > advPosi.y) {
             arrayPosition[1] = -i;
             break;
         }
@@ -242,19 +239,20 @@ void Adv::changeTexture(unsigned int count, int tex)
 void Adv::move (int direction) {
     switch (direction) {
         case 0:
-            location[1] += 0.0125f; // 上
+            location[1] += conf.objectSize.height / 8.0f; // 上
             printf("location = %f\n",location[1]);
             break;
         case 1:
-            location[1] -= 0.0125f; // 下
+            location[1] -= conf.objectSize.height / 8.0f; // 下
             printf("location = %f\n",location[1]);
             break;
         case 2:                        // 左
-            location[0] -= 0.0555556f / 8.0f; // location[0] -= 0.1f * REVERSE_WINDOW_ASPECT / 8;
+            location[0] -= conf.objectSize.width / 8.0f; //0.0555556f / 8.0f; // location[0] -= 0.1f * REVERSE_WINDOW_ASPECT / 8;
+            std::cout << "location[0] =" << location[0] << "  conf.objectSize.width =" << conf.objectSize.width / 8.0f << std::endl;
             //                    std::cout << 2.0f / 36.0f << std::endl;
             break;
         case 3:                        // 右
-            location[0] += 0.0555556f / 8.0f;
+            location[0] += conf.objectSize.width / 8.0f;
             //                std::cout << location[0] << std::endl;
             break;
         default:

@@ -11,6 +11,8 @@
 GameScene::GameScene(Adv* adv, MultipleSquare* floor)
 : advPointer(adv), floorPointer(floor) {}
 
+
+
 BlockCollision GameScene::hitCheck(){
     advPointer->reloadPosition();
     BlockCollision bc;
@@ -22,7 +24,7 @@ BlockCollision GameScene::hitCheck(){
         }
     }
     else {
-        if((floorPointer->positionArray[abs(advPointer->arrayPosition[1]) + 1][abs(advPointer->arrayPosition[0]) + 1].x + 0.000004f) < advPointer->advPosi.x + WIDTH_OBJECT) {
+        if((floorPointer->positionArray[abs(advPointer->arrayPosition[1]) + 1][abs(advPointer->arrayPosition[0]) + 1].x) < advPointer->advPosi.x + advPointer->conf.objectSize.width) {
             bc.down_left = 1;
         }
     }
@@ -35,7 +37,7 @@ BlockCollision GameScene::hitCheck(){
         }
     }
     else {
-        if((floorPointer->positionArray[abs(advPointer->arrayPosition[1]) - 1][abs(advPointer->arrayPosition[0]) + 1].x + 0.000004f) < advPointer->advPosi.x + WIDTH_OBJECT) {
+        if((floorPointer->positionArray[abs(advPointer->arrayPosition[1]) - 1][abs(advPointer->arrayPosition[0]) + 1].x + 0.04f) < advPointer->advPosi.x + WIDTH_OBJECT) {
             bc.down_right = 1;
             printf("true");
         }
@@ -68,10 +70,73 @@ BlockCollision GameScene::hitCheck(){
             bc.up_left = 1;
         }
     }
-    
-    
+
+
     return bc;
 }
+
+//
+//BlockCollision GameScene::hitCheck(){
+//    advPointer->reloadPosition();
+//    BlockCollision bc;
+//    // 上判定
+//    if(floorPointer->state[abs(advPointer->arrayPosition[1]) + 1][abs(advPointer->arrayPosition[0])] == 0.0){
+//        if((floorPointer->positionArray[abs(advPointer->arrayPosition[1]) + 1][abs(advPointer->arrayPosition[0])].y - 0.11f) <= advPointer->advPosi.y)
+//        {
+//            bc.up = 1;
+//        }
+//    }
+//    else {
+//        if((floorPointer->positionArray[abs(advPointer->arrayPosition[1]) + 1][abs(advPointer->arrayPosition[0]) + 1].x + 0.000004f) < advPointer->advPosi.x + WIDTH_OBJECT) {
+//            bc.down_left = 1;
+//        }
+//    }
+//    // 下判定
+//    if(floorPointer->state[abs(advPointer->arrayPosition[1]) - 1][abs(advPointer->arrayPosition[0])] == 0.0){
+//        if((floorPointer->positionArray[abs(advPointer->arrayPosition[1]) - 1 <= 0 ? 0 : abs(advPointer->arrayPosition[1]) - 1][abs(advPointer->arrayPosition[0])].y + 0.11)
+//           > advPointer->advPosi.y)
+//        {
+//            bc.down= 1;
+//        }
+//    }
+//    else {
+//        if((floorPointer->positionArray[abs(advPointer->arrayPosition[1]) - 1][abs(advPointer->arrayPosition[0]) + 1].x + 0.000004f) < advPointer->advPosi.x + WIDTH_OBJECT) {
+//            bc.down_right = 1;
+//            printf("true");
+//        }
+//    }
+//    // 右判定
+//    if(floorPointer->state[abs(advPointer->arrayPosition[1])][abs(advPointer->arrayPosition[0]) + 1] == 0.0){
+//        if((floorPointer->positionArray[abs(advPointer->arrayPosition[1])][abs(advPointer->arrayPosition[0]) + 1].x)
+//           > advPointer->advPosi.x)
+//        {
+//            bc.right = 1;
+//        }
+//    }
+//    // 右上のブロックに頭がつっかえてたら右に行けない
+//    else {
+//        if((floorPointer->positionArray[abs(advPointer->arrayPosition[1]) + 1][abs(advPointer->arrayPosition[0]) + 1].y) < advPointer->advPosi.y + 0.099f) {
+//            bc.up_right = 1;
+//        }
+//    }
+//    // 左判定
+//    if(floorPointer->state[abs(advPointer->arrayPosition[1])][abs(advPointer->arrayPosition[0]) - 1] == 0.0){
+//        if((floorPointer->positionArray[abs(advPointer->arrayPosition[1])][abs(advPointer->arrayPosition[0]) - 1].x + WIDTH_OBJECT)
+//           < advPointer->advPosi.x)
+//        {
+//            bc.left = 1;
+//        }
+//    }
+//    // 左上のブロックに頭がつっかえてたら左に行けない
+//    else {
+//        if((floorPointer->positionArray[abs(advPointer->arrayPosition[1]) + 1][abs(advPointer->arrayPosition[0]) - 1].y) < advPointer->advPosi.y + 0.099f) {
+//            bc.up_left = 1;
+//        }
+//    }
+//
+//
+//    return bc;
+//}
 
 void GameScene::keyJudgment(GLFWwindow* window) {
     BlockCollision bc = hitCheck();

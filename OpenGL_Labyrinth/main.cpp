@@ -18,6 +18,8 @@ int main()
     ConfigureDefine conf(GAME_MODE_EASY, WINDOW_WIDTH, WINDOW_HEIGHT);
     conf.configSetting();
     
+    std::cout << "conf =" << conf.objectSize.width << std::endl;
+    
     Adv* player = new Adv(Frame(0.2f, 0.2f, -1.0f, -1.0f),conf);
     MultipleSquare* floor = new MultipleSquare(Frame(0.2f, 0.2f, -1.0f, -1.0f),conf);
     
@@ -50,7 +52,6 @@ int main()
     
     GameScene gameScene(player, floor);
     
-    
     // MARK: メインループ
     // 背景色を指定する
     glClearColor(0.5f, 0.7f, 0.5f, 0.0f);
@@ -82,6 +83,7 @@ int main()
         
         gameScene.keyJudgment(window.getWindowInstance());
         gameScene.textureChangeByKey(window.getWindowInstance(), count);
+        
         
         glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
         glBindVertexArray(0);
