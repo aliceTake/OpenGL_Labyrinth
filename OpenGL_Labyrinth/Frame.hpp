@@ -12,21 +12,21 @@
 #include <GLFW/glfw3.h>
 
 struct Size {
-    GLfloat width, height;
+    GLdouble width, height;
     
 public:
     Size();
     
-    Size(GLfloat width, GLfloat height);
+    Size(GLdouble width, GLdouble height);
 };
 
 struct Position {
 public:
-    GLfloat x, y;
+    GLdouble x, y;
     
 public:
     Position();
-    Position(GLfloat xPosi, GLfloat yPosi);
+    Position(GLdouble xPosi, GLdouble yPosi);
     
     Position operator= (Position p);
     
@@ -48,11 +48,11 @@ public:
     
     Frame(Size s, Position p);
     
-    Frame(Size s, GLfloat x, GLfloat y);
+    Frame(Size s, GLdouble x, GLdouble y);
     
-    Frame(GLfloat width, GLfloat height, Position p);
+    Frame(GLdouble width, GLdouble height, Position p);
     
-    Frame(GLfloat width, GLfloat height, GLfloat x, GLfloat y);
+    Frame(GLdouble width, GLdouble height, GLdouble x, GLdouble y);
 };
 
 #endif /* Frame_hpp */

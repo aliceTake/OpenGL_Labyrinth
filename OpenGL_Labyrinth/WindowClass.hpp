@@ -17,10 +17,6 @@ class WindowClass{
     // ウィンドウハンドル
     GLFWwindow *const window;
     
-    // 縦横比
-    GLfloat aspect;
-    GLfloat haspect;
-    
     // キーボードの状態
     int keyStatus;
 public:
@@ -38,9 +34,6 @@ public:
     
     static void keyboard(GLFWwindow *window, int key, int scancode, int action, int mods);
     
-    // 縦横比を取り出す
-    GLfloat getAspect() const;
-    GLfloat gethAspect() const;
     GLFWwindow* getWindowInstance() const;
     int getKeyStatus();
 };

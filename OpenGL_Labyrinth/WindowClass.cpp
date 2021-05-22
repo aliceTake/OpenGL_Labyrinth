@@ -27,9 +27,6 @@ WindowClass::WindowClass(int width, int height , const char *title)
     // 垂直同期のタイミングを待つ
     glfwSwapInterval(1);
     
-    this->aspect = GLfloat(WINDOW_WIDTH) / GLfloat(WINDOW_HEIGHT);
-    this->haspect = GLfloat(WINDOW_HEIGHT) / GLfloat(WINDOW_WIDTH);
-    
     // キーボード操作時に呼び出す処理の登録
     glfwSetKeyCallback(window, keyboard);
     
@@ -72,7 +69,5 @@ void WindowClass::keyboard(GLFWwindow *window, int key, int scancode, int action
 }
 
 // 縦横比を取り出す
-GLfloat WindowClass::getAspect() const { return aspect; }
-GLfloat WindowClass::gethAspect() const { return haspect; }
 GLFWwindow* WindowClass::getWindowInstance() const { return window; }
 int WindowClass::getKeyStatus(){ return keyStatus; }

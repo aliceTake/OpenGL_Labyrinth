@@ -39,7 +39,8 @@ protected:
     GLuint vao;
     GLuint vbo;
     GLuint uv_vbo;
-    GLfloat location[2];
+    GLdouble location[2];
+    GLfloat fLocation[2];
     
 public:
     Vertex vertex; // publicなのでゲッターセッターを作る、作ったらこのコメント消す
@@ -48,13 +49,13 @@ public:
     
     SquareShape(Frame f, ConfigureDefine conf);
     
-    SquareShape(GLfloat width, GLfloat height, GLfloat x, GLfloat y);
+    SquareShape(GLdouble width, GLdouble height, GLdouble x, GLdouble y);
     
     SquareShape(Size s, Position p);
     
-    SquareShape(Size s, GLfloat x, GLfloat y);
+    SquareShape(Size s, GLdouble x, GLdouble y);
     
-    SquareShape(GLfloat width, GLfloat height, Position p);
+    SquareShape(GLdouble width, GLdouble height, Position p);
     
     void bindVao();
     
@@ -100,6 +101,7 @@ public:
     
     int arrayPosition[2] = {0, 0};
     Position advPosi;
+    Position* positionArray;
     
     void reloadPosition();
     
@@ -115,6 +117,8 @@ public:
     
     // advを動かす関数
     void move (int direction);
+    
+    void set_fLocation();
 };
 
 

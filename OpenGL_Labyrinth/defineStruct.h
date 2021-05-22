@@ -44,8 +44,8 @@ public:
     
 private:
     void sizeCalculateSet(){
-        this->objectSize.width = 2.0f / GLfloat(this->squareArrayWidth);
-        this->objectSize.height = 2.0f / GLfloat(this->squareArrayHeight);
+        this->objectSize.width = 2.0 / GLdouble(this->squareArrayWidth);
+        this->objectSize.height = 2.0 / GLdouble(this->squareArrayHeight);
     }
     void setWindowAspect(){
         this->windowAspect = GLfloat(this->windowWidth) / GLfloat(this->windowHeight);

@@ -3,6 +3,8 @@
 #include "GameScemeClass.hpp"
 #include "Object.hpp"
 
+using namespace std;
+
 int main()
 {
     if(!myGLFWInit()) {
@@ -20,8 +22,8 @@ int main()
     
     std::cout << "conf =" << conf.objectSize.width << std::endl;
     
-    Adv* player = new Adv(Frame(0.2f, 0.2f, -1.0f, -1.0f),conf);
-    MultipleSquare* floor = new MultipleSquare(Frame(0.2f, 0.2f, -1.0f, -1.0f),conf);
+    Adv* player = new Adv(Frame(0.2, 0.2, -1.0, -1.0),conf);
+    MultipleSquare* floor = new MultipleSquare(Frame(0.2, 0.2, -1.0, -1.0),conf);
     
     floor->loadTexture("floor.bmp", false);
     floor->setTextureLocation(program);
@@ -32,7 +34,9 @@ int main()
     const GLint aspectLoc1(glGetUniformLocation(advProgram, "aspect"));
     const GLint locationLoc(glGetUniformLocation(advProgram, "location"));
     
-    player->loadTexture("adv.bmp", true);
+    cout << locationLoc << endl;
+    
+    player->loadTexture("floor.bmp", false);
     player->loadTexture("adv1.bmp", true);
     player->loadTexture("adv2.bmp", true);
     player->loadTexture("adv3.bmp", true);
@@ -43,14 +47,20 @@ int main()
     player->loadTexture("adv8.bmp", true);
     player->setTextureLocation(advProgram);
     
-    
     player->bindTexture(0);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_BLEND);
 
     unsigned int count = 0;
     
+    player->positionArray = floor->positionArray[0];
+    
     GameScene gameScene(player, floor);
+    
+    cout << conf.objectSize.width << endl;
+    cout << "width =" << floor->positionArray[12][16].y << endl;
+    
+    Position* a = player->getAdvPosition();
     
     // MARK: メインループ
     // 背景色を指定する
@@ -68,7 +78,7 @@ int main()
         glUseProgram(program);
         
         // uniform変数に値を設定する
-        glUniform1f(aspectLoc, window.getAspect());
+        glUniform1f(aspectLoc, conf.windowAspect);
         
         floor->bindVao();
         floor->bindTexture(0);
@@ -77,13 +87,14 @@ int main()
         glUseProgram(0);
         
         glUseProgram(advProgram);
-        glUniform1f(aspectLoc1, window.getAspect());
+        glUniform1f(aspectLoc1, conf.windowAspect);
         glUniform2fv(locationLoc, 1, player->getLocation());
         player->bindVao();
         
         gameScene.keyJudgment(window.getWindowInstance());
         gameScene.textureChangeByKey(window.getWindowInstance(), count);
         
+        cout << "aaaa" << a->x << endl;
         
         glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
         glBindVertexArray(0);
