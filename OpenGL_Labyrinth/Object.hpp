@@ -77,7 +77,7 @@ private:
 public:
     MultipleSquare(Frame f, ConfigureDefine conf);
     
-    Position positionArray[SQUARE_ARRAY_HEIGHT][SQUARE_ARRAY_WIDTH];
+    Position positionArray[SQUARE_ARRAY_HEIGHT][SQUARE_ARRAY_WIDTH]; // ここを動的確保にしたい
     GLint state[SQUARE_ARRAY_HEIGHT][SQUARE_ARRAY_WIDTH];
     
     void multipleVertexInit();

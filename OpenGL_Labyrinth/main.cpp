@@ -20,10 +20,8 @@ int main()
     ConfigureDefine conf(GAME_MODE_EASY, WINDOW_WIDTH, WINDOW_HEIGHT);
     conf.configSetting();
     
-    std::cout << "conf =" << conf.objectSize.width << std::endl;
-    
     Adv* player = new Adv(Frame(0.2, 0.2, -1.0, -1.0),conf);
-    MultipleSquare* floor = new MultipleSquare(Frame(0.2, 0.2, -1.0, -1.0),conf);
+    MultipleSquare* floor = new MultipleSquare(Frame(0.2, 0.2, -1.0, -1.0),conf); // 0.1325
     
     floor->loadTexture("floor.bmp", false);
     floor->setTextureLocation(program);
@@ -33,8 +31,6 @@ int main()
     const GLint aspectLoc(glGetUniformLocation(program, "aspect"));
     const GLint aspectLoc1(glGetUniformLocation(advProgram, "aspect"));
     const GLint locationLoc(glGetUniformLocation(advProgram, "location"));
-    
-    cout << locationLoc << endl;
     
     player->loadTexture("floor.bmp", false);
     player->loadTexture("adv1.bmp", true);
@@ -57,11 +53,7 @@ int main()
     
     GameScene gameScene(player, floor);
     
-    cout << conf.objectSize.width << endl;
-    cout << "width =" << floor->positionArray[12][16].y << endl;
-    
-    Position* a = player->getAdvPosition();
-    
+    Position* b = player->getAdvPosition();
     // MARK: メインループ
     // 背景色を指定する
     glClearColor(0.5f, 0.7f, 0.5f, 0.0f);
@@ -82,7 +74,7 @@ int main()
         
         floor->bindVao();
         floor->bindTexture(0);
-        glDrawArraysInstanced(GL_TRIANGLE_FAN, 0, 4, SQUARE_ARRAY_WIDTH * SQUARE_ARRAY_HEIGHT);
+        glDrawArraysInstanced(GL_TRIANGLE_FAN, 0, 4, conf.squareArrayWidth * conf.squareArrayHeight);
         glBindVertexArray(0);
         glUseProgram(0);
         
@@ -94,7 +86,7 @@ int main()
         gameScene.keyJudgment(window.getWindowInstance());
         gameScene.textureChangeByKey(window.getWindowInstance(), count);
         
-        cout << "aaaa" << a->x << endl;
+        cout << "aaaa" << b->x << endl;
         
         glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
         glBindVertexArray(0);

@@ -127,8 +127,8 @@ void MultipleSquare::positionArrayInit() {
     createStateData();
     for (int h = 0; h < conf.squareArrayHeight; h++){
         for (int w = 0; w < conf.squareArrayWidth; w++){
-            this->positionArray[h][w].x = ((2.0 / (conf.windowHeight / (100 * this->frame.size.width))) * w + this->frame.position.x);
-            this->positionArray[h][w].y = (-1.0 + this->frame.size.height / 2 * h);
+            this->positionArray[h][w].x = -1.0 + conf.objectSize.width  * w; // ((2.0 / (conf.windowHeight / (100 * this->frame.size.width))) * w + this->frame.position.x);
+            this->positionArray[h][w].y = -1.0 + conf.objectSize.height * h;
         }
     }
 }
@@ -144,7 +144,7 @@ void MultipleSquare::createStateData() {
     stateInit();
     for (int h = 0; h < conf.squareArrayHeight; h++){
         for (int w = 0; w < conf.squareArrayWidth; w++){
-            if(h == 5 || h == 8 || w == 16 || h == 0 || (h == 9 && w == 3) || (h == 10 && (w == 0 || w == 1 || w == 2 || w == 3))) {
+            if(h == 5 || h == 8 || w == 16 || h == 0 || w == 32 || (h == 9 && w == 3) || (h == 10 && (w == 0 || w == 1 || w == 2 || w == 3))) {
                 this->state[h][w] = 1.0;
             }
             if(h == 5 && w == 30) {
@@ -165,11 +165,11 @@ void Adv::reloadPosition() {
     advPosi.x = (this->frame.position.x + location[0]);
     
     for(int j = 0; j < conf.squareArrayWidth; j++) {
-        if(j == 35){
+        if(j == conf.squareArrayWidth - 1){
             arrayPosition[0] = j;
             break;
         }
-        else if(GLfloat(this->positionArray[j].x) - 0.006 <= GLfloat(advPosi.x) && GLfloat(this->positionArray[(j + 1)].x) > GLfloat(advPosi.x) + 0.006){
+        else if(GLfloat(this->positionArray[j].x) - ERROR_RANGE <= GLfloat(advPosi.x) && GLfloat(this->positionArray[(j + 1)].x) > GLfloat(advPosi.x) + ERROR_RANGE){ // 0.001
             arrayPosition[0] = j;
             break;
         }
@@ -178,11 +178,11 @@ void Adv::reloadPosition() {
     advPosi.y = (this->frame.position.y + GLfloat(location[1])) + 0.5;
     
     for(int i = 0; i < conf.squareArrayHeight; i++) {
-        if(i == 19){
+        if(i == conf.squareArrayHeight - 1){
             arrayPosition[1] = i;
             break;
         }
-        else if(GLfloat(this->positionArray[i * 36].y) <= GLfloat(advPosi.y) + 0.001 && (GLfloat(this->positionArray[(i + 1) * 36].y)) > GLfloat(advPosi.y) + 0.001){
+        else if(GLfloat(this->positionArray[i * conf.squareArrayWidth].y) <= GLfloat(advPosi.y) + ERROR_RANGE && (GLfloat(this->positionArray[(i + 1) * conf.squareArrayWidth].y)) > GLfloat(advPosi.y) + ERROR_RANGE){ // 0.01
             arrayPosition[1] = i;
             break;
         }

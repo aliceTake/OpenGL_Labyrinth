@@ -14,55 +14,56 @@ GameScene::GameScene(Adv* adv, MultipleSquare* floor)
 BlockCollision GameScene::hitCheck(){
     advPointer->reloadPosition();
     BlockCollision bc;
+    
     // 上判定
-    if(floorPointer->state[abs(advPointer->arrayPosition[1]) + 1][abs(advPointer->arrayPosition[0])] == 0.0){
-        if(GLfloat(floorPointer->positionArray[abs(advPointer->arrayPosition[1]) + 1][abs(advPointer->arrayPosition[0])].y) <= GLfloat(advPointer->advPosi.y + advPointer->conf.objectSize.height))
+    if(floorPointer->state[advPointer->arrayPosition[1] + 1][advPointer->arrayPosition[0]] == 0.0){
+        if(GLfloat(floorPointer->positionArray[advPointer->arrayPosition[1] + 1][advPointer->arrayPosition[0]].y) < GLfloat(advPointer->advPosi.y + advPointer->conf.objectSize.height) + ERROR_RANGE) // 0.01
         {
             bc.up = 1;
         }
     }
     else {
-        if((floorPointer->positionArray[abs(advPointer->arrayPosition[1]) + 1][abs(advPointer->arrayPosition[0]) + 1].x) < advPointer->advPosi.x + advPointer->conf.objectSize.width) { // 0.01はわからない
+        if((floorPointer->positionArray[advPointer->arrayPosition[1] + 1][advPointer->arrayPosition[0] + 1].x) < advPointer->advPosi.x + advPointer->conf.objectSize.width - ERROR_RANGE) {
             bc.down_left = 1;
         }
     }
     // 下判定
-    if(floorPointer->state[abs(advPointer->arrayPosition[1]) - 1][abs(advPointer->arrayPosition[0])] == 0.0){
-        if((floorPointer->positionArray[abs(advPointer->arrayPosition[1]) - 1][abs(advPointer->arrayPosition[0])].y + floorPointer->conf.objectSize.height + 0.01)
-           >= advPointer->advPosi.y)
+    if(floorPointer->state[advPointer->arrayPosition[1] - 1][advPointer->arrayPosition[0]] == 0.0){
+        if((floorPointer->positionArray[advPointer->arrayPosition[1] - 1][advPointer->arrayPosition[0]].y + floorPointer->conf.objectSize.height + ERROR_RANGE)
+           > advPointer->advPosi.y)
         {
             bc.down= 1;
         }
     }
     else {
-        if((floorPointer->positionArray[abs(advPointer->arrayPosition[1]) - 1][abs(advPointer->arrayPosition[0]) + 1].x) < advPointer->advPosi.x + advPointer->conf.objectSize.width) {
+        if((floorPointer->positionArray[advPointer->arrayPosition[1] - 1][advPointer->arrayPosition[0] + 1].x) < advPointer->advPosi.x + advPointer->conf.objectSize.width - ERROR_RANGE) { // 0.001
             bc.down_right = 1;
         }
     }
     // 右判定
-    if(floorPointer->state[abs(advPointer->arrayPosition[1])][abs(advPointer->arrayPosition[0]) + 1] == 0.0){
-        if(GLfloat(floorPointer->positionArray[abs(advPointer->arrayPosition[1])][abs(advPointer->arrayPosition[0]) + 1].x) <= GLfloat(advPointer->advPosi.x + advPointer->conf.objectSize.width))
+    if(floorPointer->state[advPointer->arrayPosition[1]][advPointer->arrayPosition[0] + 1] == 0.0){
+        if(GLfloat(floorPointer->positionArray[advPointer->arrayPosition[1]][advPointer->arrayPosition[0] + 1].x) < GLfloat(advPointer->advPosi.x + advPointer->conf.objectSize.width) + ERROR_RANGE)
         {
+            std::cout << GLfloat(advPointer->advPosi.x + advPointer->conf.objectSize.width) - ERROR_RANGE << std::endl;
             bc.right = 1;
         }
     }
     // 右上のブロックに頭がつっかえてたら右に行けない
     else {
-        if((floorPointer->positionArray[abs(advPointer->arrayPosition[1]) + 1][abs(advPointer->arrayPosition[0]) + 1].y) <= advPointer->advPosi.y + advPointer->conf.objectSize.height - 0.01) {
+        if((floorPointer->positionArray[advPointer->arrayPosition[1] + 1][advPointer->arrayPosition[0] + 1].y) < advPointer->advPosi.y + advPointer->conf.objectSize.height - ERROR_RANGE) {
             bc.up_right = 1;
         }
     }
     // 左判定
-    if(floorPointer->state[abs(advPointer->arrayPosition[1])][abs(advPointer->arrayPosition[0]) - 1] == 0.0){
-        if((floorPointer->positionArray[abs(advPointer->arrayPosition[1])][abs(advPointer->arrayPosition[0]) - 1].x + floorPointer->conf.objectSize.width)
-           <= advPointer->advPosi.x + 0.01)
+    if(floorPointer->state[advPointer->arrayPosition[1]][advPointer->arrayPosition[0] - 1] == 0.0){
+        if((floorPointer->positionArray[advPointer->arrayPosition[1]][advPointer->arrayPosition[0] - 1].x + floorPointer->conf.objectSize.width) > GLfloat(advPointer->advPosi.x) - ERROR_RANGE)
         {
             bc.left = 1;
         }
     }
     // 左上のブロックに頭がつっかえてたら左に行けない
     else {
-        if((floorPointer->positionArray[abs(advPointer->arrayPosition[1]) + 1][abs(advPointer->arrayPosition[0]) - 1].y) < advPointer->advPosi.y + 0.099f) {
+        if((floorPointer->positionArray[advPointer->arrayPosition[1] + 1][advPointer->arrayPosition[0] - 1].y) < GLfloat(advPointer->advPosi.y + advPointer->conf.objectSize.height) - ERROR_RANGE) { // 0.099
             bc.up_left = 1;
         }
     }

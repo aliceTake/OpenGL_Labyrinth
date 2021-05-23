@@ -32,8 +32,27 @@ public:
     {
         if(this->mode == GAME_MODE_EASY)
         {
-            this->squareArrayHeight = 20;
             this->squareArrayWidth = 36;
+            this->squareArrayHeight = 20;
+        }
+        
+        switch(this->mode){
+            case GAME_MODE_EASY:
+                this->squareArrayWidth = 36;
+                this->squareArrayHeight = 20;
+                break;
+            case GAME_MODE_NORMAL:
+                this->squareArrayWidth = 54;
+                this->squareArrayHeight = 30;
+                break;
+            case GAME_MODE_HARD:
+                this->squareArrayWidth = 36;
+                this->squareArrayHeight = 20;
+                break;
+            default:
+                this->squareArrayWidth = 36;
+                this->squareArrayHeight = 20;
+                break;
         }
     }
     
