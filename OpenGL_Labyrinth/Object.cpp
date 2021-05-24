@@ -55,7 +55,7 @@ void SquareShape::createVbo() {
 void SquareShape::vertexInit()
 {
     vertex.lowerLeft.x  = this->frame.position.x * conf.windowAspect - conf.windowAspect; // WINDOW_ASPECT
-    vertex.lowerLeft.y  = this->frame.position.y;
+    vertex.lowerLeft.y  = this->frame.position.y * 2;
     
     vertex.lowerRight.x = vertex.lowerLeft.x + this->frame.size.width;
     vertex.lowerRight.y = vertex.lowerLeft.y;
@@ -175,7 +175,7 @@ void Adv::reloadPosition() {
         }
     }
     
-    advPosi.y = (this->frame.position.y + GLfloat(location[1])) + 0.5;
+    advPosi.y = (this->frame.position.y + GLfloat(location[1])); // + 0.5;
     
     for(int i = 0; i < conf.squareArrayHeight; i++) {
         if(i == conf.squareArrayHeight - 1){

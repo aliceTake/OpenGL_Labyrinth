@@ -28,7 +28,12 @@ BlockCollision GameScene::hitCheck(){
         }
     }
     // 下判定
-    if(floorPointer->state[advPointer->arrayPosition[1] - 1][advPointer->arrayPosition[0]] == 0.0){
+    if(advPointer->arrayPosition[1] == 0){
+        if(-1.0 >= GLfloat(advPointer->advPosi.y) - ERROR_RANGE) {
+            bc.down = 1;
+        }
+    }
+    else if(floorPointer->state[advPointer->arrayPosition[1] - 1][advPointer->arrayPosition[0]] == 0.0){
         if((floorPointer->positionArray[advPointer->arrayPosition[1] - 1][advPointer->arrayPosition[0]].y + floorPointer->conf.objectSize.height + ERROR_RANGE)
            > advPointer->advPosi.y)
         {
@@ -55,7 +60,12 @@ BlockCollision GameScene::hitCheck(){
         }
     }
     // 左判定
-    if(floorPointer->state[advPointer->arrayPosition[1]][advPointer->arrayPosition[0] - 1] == 0.0){
+    if(advPointer->arrayPosition[0] == 0){
+        if(-1.0 >= GLfloat(advPointer->advPosi.x) - ERROR_RANGE) {
+            bc.left = 1;
+        }
+    }
+    else if(floorPointer->state[advPointer->arrayPosition[1]][advPointer->arrayPosition[0] - 1] == 0.0){
         if((floorPointer->positionArray[advPointer->arrayPosition[1]][advPointer->arrayPosition[0] - 1].x + floorPointer->conf.objectSize.width) > GLfloat(advPointer->advPosi.x) - ERROR_RANGE)
         {
             bc.left = 1;

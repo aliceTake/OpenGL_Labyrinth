@@ -32,7 +32,7 @@ int main()
     const GLint aspectLoc1(glGetUniformLocation(advProgram, "aspect"));
     const GLint locationLoc(glGetUniformLocation(advProgram, "location"));
     
-    player->loadTexture("floor.bmp", false);
+    player->loadTexture("adv.bmp", true);
     player->loadTexture("adv1.bmp", true);
     player->loadTexture("adv2.bmp", true);
     player->loadTexture("adv3.bmp", true);
@@ -86,7 +86,7 @@ int main()
         gameScene.keyJudgment(window.getWindowInstance());
         gameScene.textureChangeByKey(window.getWindowInstance(), count);
         
-        cout << "aaaa" << b->x << endl;
+        cout << b->x << endl;
         
         glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
         glBindVertexArray(0);
