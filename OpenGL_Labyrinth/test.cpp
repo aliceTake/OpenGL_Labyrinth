@@ -1,3 +1,5 @@
-# include system
+# include <stdio.h>
 
-gagag
+Unchi Geri() {
+	printf("unchiBuriBuri"); // this is geri
+}
