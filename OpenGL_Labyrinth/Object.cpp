@@ -74,14 +74,13 @@ const GLfloat* SquareShape::getLocation() const
 }
 
 
-
 MultipleSquare::MultipleSquare(Frame f, ConfigureDefine conf)
 : aspectedWidth( f.size.width * conf.reverseWindowAspect), SquareShape(f, conf) {  multipleVertexInit(); createpositionArrayVbo();}
 
 void MultipleSquare::multipleVertexInit()
 {
-    this->vertex.lowerLeft.x  = 0.0;
-    this->vertex.lowerLeft.y  = this->frame.position.y;
+    this->vertex.lowerLeft.x  = 0.0;//this->frame.position.x;//this->frame.position.x;// 0.0;
+    this->vertex.lowerLeft.y  = 0.0;//this->frame.position.y;
     
     this->vertex.lowerRight.x = vertex.lowerLeft.x + this->frame.size.width;
     this->vertex.lowerRight.y = vertex.lowerLeft.y;
@@ -127,8 +126,8 @@ void MultipleSquare::positionArrayInit() {
     createStateData();
     for (int h = 0; h < conf.squareArrayHeight; h++){
         for (int w = 0; w < conf.squareArrayWidth; w++){
-            this->positionArray[h][w].x = -1.0 + conf.objectSize.width  * w; // ((2.0 / (conf.windowHeight / (100 * this->frame.size.width))) * w + this->frame.position.x);
-            this->positionArray[h][w].y = -1.0 + conf.objectSize.height * h;
+            this->positionArray[h][w].x = this->frame.position.x + conf.objectSize.width  * w; // ((2.0 / (conf.windowHeight / (100 * this->frame.size.width))) * w + this->frame.position.x);
+            this->positionArray[h][w].y = this->frame.position.y + conf.objectSize.height * h;
         }
     }
 }
@@ -280,4 +279,3 @@ void Adv::set_fLocation(){
     this->fLocation[0] = this->location[0];
     this->fLocation[1] = this->location[1];
 }
-

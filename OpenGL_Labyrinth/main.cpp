@@ -20,7 +20,7 @@ int main()
     ConfigureDefine conf(GAME_MODE_EASY, WINDOW_WIDTH, WINDOW_HEIGHT);
     conf.configSetting();
     
-    Adv* player = new Adv(Frame(0.2, 0.2, -1.0, -1.0),conf);
+    Adv* player = new Adv(Frame(0.2, 0.2, -1.0, -1.0),conf); // window_height / 36 / 100
     MultipleSquare* floor = new MultipleSquare(Frame(0.2, 0.2, -1.0, -1.0),conf); // 0.1325
     
     floor->loadTexture("floor.bmp", false);
@@ -59,9 +59,11 @@ int main()
     // 背景色を指定する
     glClearColor(0.5f, 0.7f, 0.5f, 0.0f);
     glClear(GL_COLOR_BUFFER_BIT);
+    
     // ウィンドウが開いている間繰り返す
     while (window.shouldClose() == GL_FALSE)
     {
+        
         count++;
         count = (11 + count) % 11;
         
