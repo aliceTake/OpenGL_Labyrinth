@@ -55,6 +55,7 @@
 		E181218C2655B6CE003D2444 /* Frame.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Frame.hpp; sourceTree = "<group>"; };
 		E1BD845A26528827006A72F0 /* adv4.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = adv4.bmp; path = "../../../迷路素材/adv4.bmp"; sourceTree = "<group>"; };
 		E1BD845B26528827006A72F0 /* adv5.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = adv5.bmp; path = "../../../迷路素材/adv5.bmp"; sourceTree = "<group>"; };
+		E1CA6DCA265E1A6200D69862 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		E1D3277E261ECCE100CCB9A3 /* macro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = macro.h; sourceTree = "<group>"; };
 		E1D32780261EE38F00CCB9A3 /* advVS.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = advVS.vert; sourceTree = "<group>"; };
 		E1D32781261EE40700CCB9A3 /* advFS.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = advFS.frag; sourceTree = "<group>"; };
@@ -76,6 +77,7 @@
 		E17F9735260FCADD008B5BBB = {
 			isa = PBXGroup;
 			children = (
+				E1CA6DCA265E1A6200D69862 /* .gitignore */,
 				E17F9740260FCADD008B5BBB /* OpenGL_Labyrinth */,
 				E17F973F260FCADD008B5BBB /* Products */,
 			);

@@ -132,6 +132,8 @@ void MultipleSquare::positionArrayInit() {
         }
     }
 }
+
+
 void MultipleSquare::stateInit() {
     for (int h = 0; h < conf.squareArrayHeight; h++){
         for (int w = 0; w < conf.squareArrayWidth; w++){
@@ -175,7 +177,7 @@ void Adv::reloadPosition() {
         }
     }
     
-    advPosi.y = (this->frame.position.y + GLfloat(location[1])); // + 0.5;
+    advPosi.y = (this->frame.position.y + GLfloat(location[1]));
     
     for(int i = 0; i < conf.squareArrayHeight; i++) {
         if(i == conf.squareArrayHeight - 1){
