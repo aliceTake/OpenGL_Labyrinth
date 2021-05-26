@@ -1,5 +1,5 @@
 # include <stdio.h>
 
 Unchi Geri() {
-	printf("unchiBuriBuri");
+	printf("unchiBuriBuri"); // this is geri
 }
