@@ -1,0 +1,2 @@
+C:\Users\take\source\repos\OpenGL_String_Prac\x64\Debug\OpenGL_String_Prac.exe
+C:\Users\take\source\repos\OpenGL_String_Prac\x64\Debug\OpenGL_String_Prac.pdb
