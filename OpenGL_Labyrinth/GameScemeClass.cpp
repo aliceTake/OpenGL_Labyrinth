@@ -22,17 +22,20 @@ BlockCollision GameScene::hitCheck(){
             bc.up = 1;
         }
     }
+    // 右上に頭がつっかえてたら上に行けない
     else {
         if((floorPointer->positionArray[advPointer->arrayPosition[1] + 1][advPointer->arrayPosition[0] + 1].x) < advPointer->advPosi.x + advPointer->conf.objectSize.width - ERROR_RANGE) {
             bc.down_left = 1;
         }
     }
     // 下判定
+    // 画面外にはみ出さないようにする
     if(advPointer->arrayPosition[1] == 0){
         if(-1.0 >= GLfloat(advPointer->advPosi.y) - ERROR_RANGE) {
             bc.down = 1;
         }
     }
+    // 下にブロックがあったら行けない
     else if(floorPointer->state[advPointer->arrayPosition[1] - 1][advPointer->arrayPosition[0]] == 0.0){
         if((floorPointer->positionArray[advPointer->arrayPosition[1] - 1][advPointer->arrayPosition[0]].y + floorPointer->conf.objectSize.height + ERROR_RANGE)
            > advPointer->advPosi.y)
@@ -40,6 +43,7 @@ BlockCollision GameScene::hitCheck(){
             bc.down= 1;
         }
     }
+    // 左上のブロックに頭がつっかえてたら行けない
     else {
         if((floorPointer->positionArray[advPointer->arrayPosition[1] - 1][advPointer->arrayPosition[0] + 1].x) < advPointer->advPosi.x + advPointer->conf.objectSize.width - ERROR_RANGE) { // 0.001
             bc.down_right = 1;
@@ -60,11 +64,13 @@ BlockCollision GameScene::hitCheck(){
         }
     }
     // 左判定
+    // 左の画面外に行けないように
     if(advPointer->arrayPosition[0] == 0){
         if(-1.0 >= GLfloat(advPointer->advPosi.x) - ERROR_RANGE) {
             bc.left = 1;
         }
     }
+    // 左判定
     else if(floorPointer->state[advPointer->arrayPosition[1]][advPointer->arrayPosition[0] - 1] == 0.0){
         if((floorPointer->positionArray[advPointer->arrayPosition[1]][advPointer->arrayPosition[0] - 1].x + floorPointer->conf.objectSize.width) > GLfloat(advPointer->advPosi.x) - ERROR_RANGE)
         {
@@ -135,6 +141,7 @@ void GameScene::keyJudgment(GLFWwindow* window) {
     }
 }
 
+// ボタンを押したときにテクスチャの変更
 void GameScene::textureChangeByKey(GLFWwindow* window, int count){
     if (glfwGetKey(window, GLFW_KEY_W) != GLFW_RELEASE) {
         advPointer->changeTexture(count, ADV_BACK_TEXTURE);

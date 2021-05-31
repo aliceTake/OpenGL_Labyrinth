@@ -7,21 +7,25 @@
 
 #include "Object.hpp"
 
-SquareShape::SquareShape(Frame f, ConfigureDefine conf)
-: location { 0.0, 0.0 }, fLocation { 0.0, 0.0 }, frame(f.size, f.position), conf{conf}  { vertexInit(); createVbo(); }
+SquareShape::SquareShape(Frame f)
+: location { 0.0, 0.0 }, fLocation { 0.0, 0.0 }, alpha(0.0), frame(f.size, f.position)  {}
 
 SquareShape::SquareShape(GLdouble width, GLdouble height, GLdouble x, GLdouble y)
-: location { 0.0, 0.0 }, fLocation { 0.0, 0.0 }, frame(width, height, x, y) { vertexInit(); createVbo(); }
+: location { 0.0, 0.0 }, fLocation { 0.0, 0.0 }, frame(width, height, x, y) {}
 
 SquareShape::SquareShape(Size s, Position p)
-: location { 0.0, 0.0 }, fLocation { 0.0, 0.0 }, frame(s ,p) { vertexInit(); createVbo(); }
+: location { 0.0, 0.0 }, fLocation { 0.0, 0.0 }, frame(s ,p) {}
 
 SquareShape::SquareShape(Size s, GLdouble x, GLdouble y)
-: location { 0.0, 0.0 }, fLocation { 0.0, 0.0 }, frame(s, x, y) { vertexInit(); createVbo(); }
+: location { 0.0, 0.0 }, fLocation { 0.0, 0.0 }, frame(s, x, y) {}
 
 SquareShape::SquareShape(GLdouble width, GLdouble height, Position p)
-: location { 0.0, 0.0 }, fLocation { 0.0, 0.0 }, frame(width, height, p) { vertexInit(); createVbo(); }
+: location { 0.0, 0.0 }, fLocation { 0.0, 0.0 }, frame(width, height, p) {}
 
+void SquareShape::createSquare(){
+    vertexInit();
+    createVbo();
+}
 
 void SquareShape::bindVao() {
     glBindVertexArray(vao);
@@ -49,11 +53,71 @@ void SquareShape::createVbo() {
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertex_uv), &vertex_uv, GL_STATIC_DRAW);
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, 0);
     
+    glEnableVertexAttribArray(2);
+    glGenBuffers(1, &colorVbo);
+    glBindBuffer(GL_ARRAY_BUFFER, colorVbo);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(color), color, GL_STATIC_DRAW);
+    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, 0);
+    
+    glEnableVertexAttribArray(3);
+    glGenBuffers(1, &alphaVbo);
+    glBindBuffer(GL_ARRAY_BUFFER, alphaVbo);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(alpha), &alpha, GL_STATIC_DRAW);
+    glVertexAttribPointer(3, 1, GL_FLOAT, GL_FALSE, 0, 0);
+    
     glBindVertexArray(0);
 }
 
 void SquareShape::vertexInit()
 {
+    vertex.lowerLeft.x  = this->frame.position.x; // WINDOW_ASPECT
+    vertex.lowerLeft.y  = this->frame.position.y;
+    
+    vertex.lowerRight.x = vertex.lowerLeft.x + this->frame.size.width;
+    vertex.lowerRight.y = vertex.lowerLeft.y;
+    
+    vertex.upperRight.x = vertex.lowerRight.x;
+    vertex.upperRight.y = vertex.lowerRight.y + this->frame.size.height;
+    
+    vertex.upperLeft.x  = vertex.lowerLeft.x;
+    vertex.upperLeft.y  = vertex.upperRight.y;
+}
+
+void SquareShape::changeColor(GLfloat red, GLfloat green, GLfloat blue) {
+    for(int i = 0; i < 4; i++){
+        color[i].red = red;
+        color[i].green = green;
+        color[i].blue = blue;
+        
+        bindVao();
+        
+        glBindBuffer(GL_ARRAY_BUFFER, colorVbo);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(color), color, GL_STATIC_DRAW);
+        glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, 0);
+    }
+}
+
+void SquareShape::changeAlpha(GLfloat alpha) {
+    this->alpha = alpha;
+    
+    bindVao();
+    
+    glBindBuffer(GL_ARRAY_BUFFER, alphaVbo);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(alpha), &alpha, GL_STATIC_DRAW);
+    glVertexAttribPointer(3, 1, GL_FLOAT, GL_FALSE, 0, 0);
+}
+
+const GLfloat* SquareShape::getLocation() const
+{
+    return fLocation;
+}
+
+MultipleSquare::MultipleSquare(Frame f, ConfigureDefine conf)
+: aspectedWidth( f.size.width * conf.reverseWindowAspect), conf(conf), SquareShape(f) { vertexInit(); createVbo(); multipleVertexInit(); createpositionArrayVbo();}
+
+void MultipleSquare::vertexInit()
+{
+    
     vertex.lowerLeft.x  = this->frame.position.x * conf.windowAspect - conf.windowAspect; // WINDOW_ASPECT
     vertex.lowerLeft.y  = this->frame.position.y * 2;
     
@@ -67,15 +131,26 @@ void SquareShape::vertexInit()
     vertex.upperLeft.y  = vertex.upperRight.y;
 }
 
-const GLfloat* SquareShape::getLocation() const
-{
-    return fLocation;
+void MultipleSquare::createVbo() {
+    glGenVertexArrays(1, &vao);
+    bindVao();
     
+    glGenBuffers(1, &vbo);
+    glEnableVertexAttribArray(0);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+    glBufferData(GL_ARRAY_BUFFER, sizeof (Vertex), &vertex, GL_STATIC_DRAW);
+    glVertexAttribPointer(0, 2, GL_DOUBLE, GL_FALSE, 0, 0);
+    
+    // テクスチャのvbo
+    //追加：テクスチャのUV座標を格納するためのVBOを作成
+    glEnableVertexAttribArray(1);
+    glGenBuffers(1, &uv_vbo);
+    glBindBuffer(GL_ARRAY_BUFFER, uv_vbo);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertex_uv), &vertex_uv, GL_STATIC_DRAW);
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, 0);
+    
+    glBindVertexArray(0);
 }
-
-
-MultipleSquare::MultipleSquare(Frame f, ConfigureDefine conf)
-: aspectedWidth( f.size.width * conf.reverseWindowAspect), SquareShape(f, conf) {  multipleVertexInit(); createpositionArrayVbo();}
 
 void MultipleSquare::multipleVertexInit()
 {
@@ -126,7 +201,7 @@ void MultipleSquare::positionArrayInit() {
     createStateData();
     for (int h = 0; h < conf.squareArrayHeight; h++){
         for (int w = 0; w < conf.squareArrayWidth; w++){
-            this->positionArray[h][w].x = this->frame.position.x + conf.objectSize.width  * w; // ((2.0 / (conf.windowHeight / (100 * this->frame.size.width))) * w + this->frame.position.x);
+            this->positionArray[h][w].x = this->frame.position.x + conf.objectSize.width  * w;
             this->positionArray[h][w].y = this->frame.position.y + conf.objectSize.height * h;
         }
     }
@@ -160,7 +235,46 @@ Position* MultipleSquare::getPositionArray(int h, int w) {
 }
 
 
-Adv::Adv(Frame f, ConfigureDefine conf) : SquareShape(f,conf) {advPosi.x = 0.0; advPosi.y = 0.0;};
+Adv::Adv(Frame f, ConfigureDefine conf) : SquareShape(f) ,conf(conf) { vertexInit(); createVbo(); advPosi.x = 0.0; advPosi.y = 0.0;};
+
+
+
+void Adv::vertexInit()
+{
+    
+    vertex.lowerLeft.x  = this->frame.position.x * conf.windowAspect - conf.windowAspect; // WINDOW_ASPECT
+    vertex.lowerLeft.y  = this->frame.position.y * 2;
+    
+    vertex.lowerRight.x = vertex.lowerLeft.x + this->frame.size.width;
+    vertex.lowerRight.y = vertex.lowerLeft.y;
+    
+    vertex.upperRight.x = vertex.lowerRight.x;
+    vertex.upperRight.y = vertex.lowerRight.y + this->frame.size.height;
+    
+    vertex.upperLeft.x  = vertex.lowerLeft.x;
+    vertex.upperLeft.y  = vertex.upperRight.y;
+}
+
+void Adv::createVbo() {
+    glGenVertexArrays(1, &vao);
+    bindVao();
+    
+    glGenBuffers(1, &vbo);
+    glEnableVertexAttribArray(0);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+    glBufferData(GL_ARRAY_BUFFER, sizeof (Vertex), &vertex, GL_STATIC_DRAW);
+    glVertexAttribPointer(0, 2, GL_DOUBLE, GL_FALSE, 0, 0);
+    
+    // テクスチャのvbo
+    //追加：テクスチャのUV座標を格納するためのVBOを作成
+    glEnableVertexAttribArray(1);
+    glGenBuffers(1, &uv_vbo);
+    glBindBuffer(GL_ARRAY_BUFFER, uv_vbo);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertex_uv), &vertex_uv, GL_STATIC_DRAW);
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, 0);
+    
+    glBindVertexArray(0);
+}
 
 void Adv::reloadPosition() {
     advPosi.x = (this->frame.position.x + location[0]);
@@ -188,12 +302,6 @@ void Adv::reloadPosition() {
             break;
         }
     }
-//    for(int i = 0; i < conf.squareArrayHeight; i++) {
-//        if((GLfloat(conf.objectSize.height) * i) - 1.0 <= advPosi.y + conf.objectSize.height && (GLfloat(conf.objectSize.height * (i + 1))) - 1.0 > advPosi.y + conf.objectSize.height){
-//            arrayPosition[1] = (i < 0 ? 0 : i);
-//            break;
-//        }
-//    }
 }
 
 Position* Adv::getAdvPosition() {
@@ -251,24 +359,15 @@ void Adv::move (int direction) {
     switch (direction) {
         case 0:
             location[1] += conf.objectSize.height / 8.0; // 上
-            printf("location = %f\n",location[1]);
             break;
         case 1:
             location[1] -= conf.objectSize.height / 8.0; // 下
-            printf("location = %f\n",location[1]);
             break;
-        case 2:                        // 左
-            location[0] -= conf.objectSize.width / 8.0; //0.0555556f / 8.0f; // location[0] -= 0.1f * REVERSE_WINDOW_ASPECT / 8;
-            std::cout << "location[0] =" << location[0] << std::endl;
-            std::cout << "location[0] =" << location[0] << std::endl;
-            //                    std::cout << 2.0f / 36.0f << std::endl;
+        case 2:
+            location[0] -= conf.objectSize.width / 8.0; // 左
             break;
-        case 3:                        // 右
-            location[0] += conf.objectSize.width / 8.0;
-            
-            std::cout << "location[0] =" << location[0] << std::endl;
-            std::cout << "location[0] =" << location[0] << std::endl;
-            //                std::cout << location[0] << std::endl;
+        case 3:
+            location[0] += conf.objectSize.width / 8.0; // 右
             break;
         default:
             break;

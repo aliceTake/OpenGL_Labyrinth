@@ -20,6 +20,8 @@ class GameScene {
 public:
     GameScene(Adv* adv, MultipleSquare* floor);
     
+    void createPlayer();
+    
     BlockCollision hitCheck();
     
     void keyJudgment(GLFWwindow* window);

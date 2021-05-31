@@ -15,6 +15,7 @@ struct Size {
     GLdouble width, height;
     
 public:
+    
     Size();
     
     Size(GLdouble width, GLdouble height);
@@ -35,10 +36,6 @@ public:
 
 struct Vertex {
     Position lowerLeft, lowerRight, upperRight, upperLeft;
-    
-    Vertex operator= (Vertex v);
-    
-    Vertex operator+ (Vertex v);
 };
 
 struct Frame {

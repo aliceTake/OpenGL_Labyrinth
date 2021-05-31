@@ -16,6 +16,7 @@ int main()
     // プログラムオブジェクトを作成する
     const GLuint program(loadProgram("point.vert", "point.frag"));
     const GLuint advProgram(loadProgram("advVS.vert", "advFS.frag"));
+    const GLuint objectProgram(loadProgram("object.vert", "object.frag"));
     
     ConfigureDefine conf(GAME_MODE_EASY, WINDOW_WIDTH, WINDOW_HEIGHT);
     conf.configSetting();
@@ -26,6 +27,11 @@ int main()
     floor->loadTexture("floor.bmp", false);
     floor->setTextureLocation(program);
     floor->bindTexture(0);
+    
+    SquareShape square(Frame(1.0, 1.0, -1.0, -1.0));
+    square.createSquare();
+    
+    square.changeColor(1.0, 0.0, 0.0);
     
     // uniform変数の場所を取得する
     const GLint aspectLoc(glGetUniformLocation(program, "aspect"));
@@ -52,8 +58,6 @@ int main()
     player->positionArray = floor->positionArray[0];
     
     GameScene gameScene(player, floor);
-    
-    Position* b = player->getAdvPosition();
     
     // MARK: メインループ
     // 背景色を指定する
@@ -90,11 +94,18 @@ int main()
         gameScene.keyJudgment(window.getWindowInstance());
         gameScene.textureChangeByKey(window.getWindowInstance(), count);
         
-        cout << b->x << endl;
+        glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+        glBindTexture(GL_TEXTURE_2D, 0);
+        glBindVertexArray(0);
+        glUseProgram(0);
         
+        // 赤い四角の描画
+        glUseProgram(objectProgram);
+        square.bindVao();
         glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
         glBindVertexArray(0);
         glUseProgram(0);
+        // 赤い四角の描画
 
         std::cout << player->arrayPosition[0] << player->arrayPosition[1] << std::endl;
         // カラーバッファを入れ替える

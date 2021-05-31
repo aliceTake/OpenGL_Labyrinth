@@ -33,21 +33,31 @@ struct BlockCollision {
     int up_right = 0, up_left = 0, down_right = 0, down_left = 0;
 };
 
+struct Color {
+    GLfloat red, green, blue;
+    
+    Color()
+    : red(1.0), green(1.0), blue(1.0) {}
+};
 
 class SquareShape : public Texture {
 protected:
     GLuint vao;
     GLuint vbo;
     GLuint uv_vbo;
+    GLuint colorVbo;
+    GLuint alphaVbo;
     GLdouble location[2];
     GLfloat fLocation[2];
+    Color color[4];
     
 public:
     Vertex vertex; // publicなのでゲッターセッターを作る、作ったらこのコメント消す
     Frame frame;   // publicなのでゲッターセッターを作る、作ったらこのコメント消す
-    ConfigureDefine conf; // publicなのでゲッターセッターを作る、作ったらこのコメント消す
     
-    SquareShape(Frame f, ConfigureDefine conf);
+    GLfloat alpha;
+    
+    SquareShape(Frame f);
     
     SquareShape(GLdouble width, GLdouble height, GLdouble x, GLdouble y);
     
@@ -57,6 +67,8 @@ public:
     
     SquareShape(GLdouble width, GLdouble height, Position p);
     
+    void createSquare();
+    
     void bindVao();
     
     void bindVbo();
@@ -64,6 +76,10 @@ public:
     void createVbo();
     
     void vertexInit();
+    
+    void changeColor(GLfloat red, GLfloat green, GLfloat blue);
+    
+    void changeAlpha(GLfloat alpha);
     
     const GLfloat *getLocation() const;
 };
@@ -74,10 +90,15 @@ private:
     GLfloat aspectedWidth;
     GLuint statusVbo;
     
+    void createVbo();
+    void vertexInit();
+    
 public:
     MultipleSquare(Frame f, ConfigureDefine conf);
+    ConfigureDefine conf;
     Position positionArray[SQUARE_ARRAY_HEIGHT][SQUARE_ARRAY_WIDTH]; // ここを動的確保にしたい
     GLint state[SQUARE_ARRAY_HEIGHT][SQUARE_ARRAY_WIDTH];
+
     
     void multipleVertexInit();
     
@@ -95,8 +116,14 @@ public:
 
 class Adv : public SquareShape {
     
+    void vertexInit();
+    
+    void createVbo();
+    
 public:
     Adv(Frame f, ConfigureDefine conf);
+    
+    ConfigureDefine conf;
     
     int arrayPosition[2] = {0, 0};
     Position advPosi;

@@ -59,6 +59,8 @@
 		E1D3277E261ECCE100CCB9A3 /* macro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = macro.h; sourceTree = "<group>"; };
 		E1D32780261EE38F00CCB9A3 /* advVS.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = advVS.vert; sourceTree = "<group>"; };
 		E1D32781261EE40700CCB9A3 /* advFS.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = advFS.frag; sourceTree = "<group>"; };
+		E1E197702664CA010091E5C9 /* object.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = object.vert; sourceTree = "<group>"; };
+		E1E197722664D00F0091E5C9 /* object.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = object.frag; sourceTree = "<group>"; };
 		E1E6E3652654D6E1005176A6 /* WindowClass.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = WindowClass.cpp; sourceTree = "<group>"; };
 		E1E6E3662654D6E1005176A6 /* WindowClass.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = WindowClass.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -113,6 +115,8 @@
 				E1D32781261EE40700CCB9A3 /* advFS.frag */,
 				E17F974B260FCE58008B5BBB /* point.vert */,
 				E17F974C260FCE58008B5BBB /* point.frag */,
+				E1E197702664CA010091E5C9 /* object.vert */,
+				E1E197722664D00F0091E5C9 /* object.frag */,
 				E1769F6026186F1F00158A6E /* floor.bmp */,
 				E12FED35261A80E90002FFAB /* adv.bmp */,
 				E147A6C7262139C700484FA2 /* adv1.bmp */,
