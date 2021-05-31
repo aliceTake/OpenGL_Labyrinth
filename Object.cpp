@@ -1,4 +1,4 @@
-//
+﻿//
 //  ObjectClass.cpp
 //  OpenGL_Labyrinth
 //
@@ -8,19 +8,19 @@
 #include "Object.hpp"
 
 SquareShape::SquareShape(Frame f)
-: location { 0.0, 0.0 }, fLocation { 0.0, 0.0 }, alpha{1.0, 1.0, 1.0, 1.0}, frame(f.size, f.position)  {}
+: location { 0.0, 0.0 }, fLocation { 0.0, 0.0 }, alpha{0.0, 0.0, 0.0, 0.0}, frame(f.size, f.position)  {}
 
 SquareShape::SquareShape(GLdouble width, GLdouble height, GLdouble x, GLdouble y)
-: location { 0.0, 0.0 }, fLocation { 0.0, 0.0 }, alpha{1.0, 1.0, 1.0, 1.0}, frame(width, height, x, y) {}
+: location { 0.0, 0.0 }, fLocation { 0.0, 0.0 }, alpha{0.0, 0.0, 0.0, 0.0}, frame(width, height, x, y) {}
 
 SquareShape::SquareShape(Size s, Position p)
-: location { 0.0, 0.0 }, fLocation { 0.0, 0.0 }, alpha{1.0, 1.0, 1.0, 1.0}, frame(s ,p) {}
+: location { 0.0, 0.0 }, fLocation { 0.0, 0.0 }, alpha{0.0, 0.0, 0.0, 0.0}, frame(s ,p) {}
 
 SquareShape::SquareShape(Size s, GLdouble x, GLdouble y)
-: location { 0.0, 0.0 }, fLocation { 0.0, 0.0 }, alpha{1.0, 1.0, 1.0, 1.0}, frame(s, x, y) {}
+: location { 0.0, 0.0 }, fLocation { 0.0, 0.0 }, alpha{0.0, 0.0, 0.0, 0.0}, frame(s, x, y) {}
 
 SquareShape::SquareShape(GLdouble width, GLdouble height, Position p)
-: location { 0.0, 0.0 }, fLocation { 0.0, 0.0 }, alpha{1.0, 1.0, 1.0, 1.0}, frame(width, height, p) {}
+: location { 0.0, 0.0 }, fLocation { 0.0, 0.0 }, alpha{0.0, 0.0, 0.0, 0.0}, frame(width, height, p) {}
 
 void SquareShape::createSquare(){
     vertexInit();
@@ -98,10 +98,10 @@ void SquareShape::changeColor(GLfloat red, GLfloat green, GLfloat blue) {
 }
 
 void SquareShape::changeAlpha(GLfloat alpha) {
-    this->alpha[0] = alpha;
-    this->alpha[1] = alpha;
-    this->alpha[2] = alpha;
-    this->alpha[3] = alpha;
+    this->alpha[0] = 1.0 - alpha;
+    this->alpha[1] = 1.0 - alpha;
+    this->alpha[2] = 1.0 - alpha;
+    this->alpha[3] = 1.0 - alpha;
     
     bindVao();
     
