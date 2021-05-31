@@ -55,7 +55,7 @@ public:
     Vertex vertex; // publicなのでゲッターセッターを作る、作ったらこのコメント消す
     Frame frame;   // publicなのでゲッターセッターを作る、作ったらこのコメント消す
     
-    GLfloat alpha;
+    GLfloat alpha[4];
     
     SquareShape(Frame f);
     

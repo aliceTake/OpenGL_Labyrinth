@@ -32,6 +32,7 @@ int main()
     square.createSquare();
     
     square.changeColor(1.0, 0.0, 0.0);
+    square.changeAlpha(0.5);
     
     // uniform変数の場所を取得する
     const GLint aspectLoc(glGetUniformLocation(program, "aspect"));
