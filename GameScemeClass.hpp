@@ -1,4 +1,4 @@
-﻿//
+//
 //  gameScemeClass.hpp
 //  OpenGL_Labyrinth
 //
@@ -9,7 +9,8 @@
 #define GameScemeClass_hpp
 
 #include "macro.h"
-#include "Object.hpp"
+#include "ObjectHeaderMacro.h"
+#include "WindowClass.hpp"
 #include "defineStruct.h"
 
 class GameScene {
@@ -18,7 +19,8 @@ class GameScene {
     //    Position* positionArray;
     
 public:
-    GameScene(Adv* adv, MultipleSquare* floor);
+    GameScene();
+    virtual ~GameScene();
     
     void createPlayer();
     
@@ -27,6 +29,8 @@ public:
     void keyJudgment(GLFWwindow* window);
     
     void textureChangeByKey(GLFWwindow* window, int count);
+    
+    void run(WindowClass* window);
 };
 
 #endif /* GameScemeClass_hpp */

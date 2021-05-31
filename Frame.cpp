@@ -1,4 +1,4 @@
-﻿//
+//
 //  Frame.cpp
 //  OpenGL_Labyrinth
 //

@@ -1,4 +1,4 @@
-﻿//
+//
 //  gameScemeClass.cpp
 //  OpenGL_Labyrinth
 //
@@ -8,8 +8,25 @@
 #include "GameScemeClass.hpp"
 
 
-GameScene::GameScene(Adv* adv, MultipleSquare* floor)
-: advPointer(adv), floorPointer(floor) {}
+GameScene::GameScene()
+{
+    
+    ConfigureDefine conf(GAME_MODE_EASY, WINDOW_WIDTH, WINDOW_HEIGHT);
+    conf.configSetting();
+    
+    advPointer = new Adv(Frame(0.2, 0.2, -1.0, -1.0),conf); // window_height / 36 / 100
+    floorPointer = new MultipleSquare(Frame(0.2, 0.2, -1.0, -1.0),conf); // 0.1325
+    
+    floorPointer->floorLoadTexture();
+    
+    advPointer->advLoadTexture();
+    
+    advPointer->bindTexture(0);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glEnable(GL_BLEND);
+
+    advPointer->positionArray = floorPointer->positionArray[0];
+}
 
 BlockCollision GameScene::hitCheck(){
     advPointer->reloadPosition();
@@ -53,7 +70,6 @@ BlockCollision GameScene::hitCheck(){
     if(floorPointer->state[advPointer->arrayPosition[1]][advPointer->arrayPosition[0] + 1] == 0.0){
         if(GLfloat(floorPointer->positionArray[advPointer->arrayPosition[1]][advPointer->arrayPosition[0] + 1].x) < GLfloat(advPointer->advPosi.x + advPointer->conf.objectSize.width) + ERROR_RANGE)
         {
-            std::cout << GLfloat(advPointer->advPosi.x + advPointer->conf.objectSize.width) - ERROR_RANGE << std::endl;
             bc.right = 1;
         }
     }
@@ -160,4 +176,32 @@ void GameScene::textureChangeByKey(GLFWwindow* window, int count){
     else {
         advPointer->bindTexture(0);
     }
+}
+
+void GameScene::run(WindowClass* window) {
+    unsigned int count = 0;
+    
+    while (glfwGetKey(window->getWindowInstance(), GLFW_KEY_ESCAPE) == GL_FALSE) {
+        count++;
+        count = (11 + count) % 11;
+        glClear(GL_COLOR_BUFFER_BIT);
+        
+        floorPointer->draw();
+        
+        advPointer->useProgram();
+        advPointer->bindVao();
+        this->keyJudgment(window->getWindowInstance());
+        this->textureChangeByKey(window->getWindowInstance(), count);
+        glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+        glBindTexture(GL_TEXTURE_2D, 0);
+        glBindVertexArray(0);
+        glUseProgram(0);
+        
+        window->swapBuffers();
+    }
+}
+
+GameScene::~GameScene(){
+    delete advPointer;
+    delete floorPointer;
 }

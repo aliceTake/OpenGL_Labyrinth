@@ -1,4 +1,4 @@
-﻿#version 150 core
+#version 150 core
 //#extension GL_ARB_explicit_attrib_location: enable
 //in vec2 UV;
 

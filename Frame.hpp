@@ -1,4 +1,4 @@
-﻿//
+//
 //  Frame.hpp
 //  OpenGL_Labyrinth
 //
@@ -34,10 +34,6 @@ public:
     Position operator+ (Position p);
 };
 
-struct Vertex {
-    Position lowerLeft, lowerRight, upperRight, upperLeft;
-};
-
 struct Frame {
 public:
     Size size;
@@ -52,4 +48,33 @@ public:
     Frame(GLdouble width, GLdouble height, GLdouble x, GLdouble y);
 };
 
+struct Vertex {
+    Position lowerLeft, lowerRight, upperRight, upperLeft;
+};
+
+static const GLfloat vertex_uv[] =
+{
+    1.0f, 0.0f,
+    0.0f, 0.0f,
+    0.0f, 1.0f,
+    1.0f, 1.0f,
+    
+    0.0f, 0.0f,
+    1.0f, 0.0f,
+    1.0f, 1.0f,
+    0.0f, 1.0f
+    
+};
+
+struct BlockCollision {
+    int right = 0, left = 0, up = 0, down = 0;
+    int up_right = 0, up_left = 0, down_right = 0, down_left = 0;
+};
+
+struct Color {
+    GLfloat red, green, blue;
+    
+    Color()
+    : red(1.0), green(1.0), blue(1.0) {}
+};
 #endif /* Frame_hpp */
