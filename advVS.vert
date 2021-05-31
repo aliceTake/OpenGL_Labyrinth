@@ -1,4 +1,8 @@
+﻿<<<<<<< HEAD
 ﻿#version 150 core
+=======
+#version 150 core
+>>>>>>> origin/testBranch
 #extension GL_ARB_explicit_attrib_location: enable
 uniform float aspect;
 uniform vec2 location;
