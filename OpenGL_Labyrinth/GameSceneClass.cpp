@@ -5,17 +5,17 @@
 //  Created by take on 2021/05/19.
 //
 
-#include "GameScemeClass.hpp"
+#include "GameSceneClass.hpp"
 
 
-GameScene::GameScene()
+GameScene::GameScene(int mode, int windowWidth, int windowHeight)
 {
     
-    ConfigureDefine conf(GAME_MODE_EASY, WINDOW_WIDTH, WINDOW_HEIGHT);
+    ConfigureDefine conf(mode, windowWidth, windowHeight);
     conf.configSetting();
     
-    advPointer = new Adv(Frame(0.2, 0.2, -1.0, -1.0),conf); // window_height / 36 / 100
-    floorPointer = new MultipleSquare(Frame(0.2, 0.2, -1.0, -1.0),conf); // 0.1325
+    advPointer = new Adv(Frame(conf.glObjectSize, conf.glObjectSize, -1.0, -1.0),conf); // window_height / 36 / 100
+    floorPointer = new MultipleSquare(Frame(conf.glObjectSize, conf.glObjectSize, -1.0, -1.0),conf); // 0.1325
     
     floorPointer->floorLoadTexture();
     
@@ -25,15 +25,21 @@ GameScene::GameScene()
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_BLEND);
 
-    advPointer->positionArray = floorPointer->positionArray[0];
+    advPointer->positionArray = floorPointer->positionArray;
 }
 
 BlockCollision GameScene::hitCheck(){
     advPointer->reloadPosition();
     BlockCollision bc;
-    
+
+    std::cout << advPointer->arrayPosition[1] << " " << advPointer->arrayPosition[0] << std::endl;
     // 上判定
-    if(floorPointer->state[advPointer->arrayPosition[1] + 1][advPointer->arrayPosition[0]] == 0.0){
+    if(advPointer->arrayPosition[1] == floorPointer->conf.squareArrayHeight - 1){
+        if(1.0 <= GLfloat(advPointer->advPosi.y) + advPointer->conf.objectSize.height + ERROR_RANGE) {
+            bc.up = 1;
+        }
+    }
+    else if(floorPointer->state[advPointer->arrayPosition[1] + 1][advPointer->arrayPosition[0]] == 0.0){
         if(GLfloat(floorPointer->positionArray[advPointer->arrayPosition[1] + 1][advPointer->arrayPosition[0]].y) < GLfloat(advPointer->advPosi.y + advPointer->conf.objectSize.height) + ERROR_RANGE) // 0.01
         {
             bc.up = 1;
@@ -67,7 +73,12 @@ BlockCollision GameScene::hitCheck(){
         }
     }
     // 右判定
-    if(floorPointer->state[advPointer->arrayPosition[1]][advPointer->arrayPosition[0] + 1] == 0.0){
+    if(advPointer->arrayPosition[0] == floorPointer->conf.squareArrayWidth - 1){
+        if(1.0 <= GLfloat(advPointer->advPosi.x) + advPointer->conf.objectSize.width + ERROR_RANGE) {
+            bc.right = 1;
+        }
+    }
+    else if(floorPointer->state[advPointer->arrayPosition[1]][advPointer->arrayPosition[0] + 1] == 0.0){
         if(GLfloat(floorPointer->positionArray[advPointer->arrayPosition[1]][advPointer->arrayPosition[0] + 1].x) < GLfloat(advPointer->advPosi.x + advPointer->conf.objectSize.width) + ERROR_RANGE)
         {
             bc.right = 1;

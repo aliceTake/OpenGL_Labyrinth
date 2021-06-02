@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E120DDDD2654D06400D95D38 /* GameScemeClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E120DDDB2654D06400D95D38 /* GameScemeClass.cpp */; };
+		E120DDDD2654D06400D95D38 /* GameSceneClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E120DDDB2654D06400D95D38 /* GameSceneClass.cpp */; };
 		E120DDE52654D29A00D95D38 /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E120DDE32654D29A00D95D38 /* Texture.cpp */; };
 		E120DDED2654D3A900D95D38 /* ShaderLoadFuncs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E120DDEB2654D3A900D95D38 /* ShaderLoadFuncs.cpp */; };
 		E17F9742260FCADD008B5BBB /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E17F9741260FCADD008B5BBB /* main.cpp */; };
@@ -35,8 +35,8 @@
 		E120DDD72654CB4A00D95D38 /* adv8.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = adv8.bmp; sourceTree = "<group>"; };
 		E120DDD82654CB4A00D95D38 /* adv7.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = adv7.bmp; sourceTree = "<group>"; };
 		E120DDDA2654D04200D95D38 /* defineStruct.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = defineStruct.h; sourceTree = "<group>"; };
-		E120DDDB2654D06400D95D38 /* GameScemeClass.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GameScemeClass.cpp; sourceTree = "<group>"; };
-		E120DDDC2654D06400D95D38 /* GameScemeClass.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GameScemeClass.hpp; sourceTree = "<group>"; };
+		E120DDDB2654D06400D95D38 /* GameSceneClass.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GameSceneClass.cpp; sourceTree = "<group>"; };
+		E120DDDC2654D06400D95D38 /* GameSceneClass.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GameSceneClass.hpp; sourceTree = "<group>"; };
 		E120DDE02654D09E00D95D38 /* ObjectHeaderMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjectHeaderMacro.h; sourceTree = "<group>"; };
 		E120DDE32654D29A00D95D38 /* Texture.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Texture.cpp; sourceTree = "<group>"; };
 		E120DDE42654D29A00D95D38 /* Texture.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Texture.hpp; sourceTree = "<group>"; };
@@ -105,6 +105,7 @@
 			children = (
 				E1D3277E261ECCE100CCB9A3 /* macro.h */,
 				E120DDDA2654D04200D95D38 /* defineStruct.h */,
+				E120DDE02654D09E00D95D38 /* ObjectHeaderMacro.h */,
 				E17F9741260FCADD008B5BBB /* main.cpp */,
 				E181218B2655B6CE003D2444 /* Frame.cpp */,
 				E181218C2655B6CE003D2444 /* Frame.hpp */,
@@ -112,9 +113,8 @@
 				E1E6E3662654D6E1005176A6 /* WindowClass.hpp */,
 				E120DDEB2654D3A900D95D38 /* ShaderLoadFuncs.cpp */,
 				E120DDEC2654D3A900D95D38 /* ShaderLoadFuncs.hpp */,
-				E120DDDB2654D06400D95D38 /* GameScemeClass.cpp */,
-				E120DDDC2654D06400D95D38 /* GameScemeClass.hpp */,
-				E120DDE02654D09E00D95D38 /* ObjectHeaderMacro.h */,
+				E120DDDB2654D06400D95D38 /* GameSceneClass.cpp */,
+				E120DDDC2654D06400D95D38 /* GameSceneClass.hpp */,
 				E1D6586726654F180011B6EF /* SquareShape.cpp */,
 				E1D6586826654F180011B6EF /* SquareShape.hpp */,
 				E1D6586C26654F610011B6EF /* MultipleSquare.cpp */,
@@ -206,7 +206,7 @@
 				E1E6E3672654D6E1005176A6 /* WindowClass.cpp in Sources */,
 				E120DDED2654D3A900D95D38 /* ShaderLoadFuncs.cpp in Sources */,
 				E1D6586526654EC30011B6EF /* Adv.cpp in Sources */,
-				E120DDDD2654D06400D95D38 /* GameScemeClass.cpp in Sources */,
+				E120DDDD2654D06400D95D38 /* GameSceneClass.cpp in Sources */,
 				E181218D2655B6CE003D2444 /* Frame.cpp in Sources */,
 				E17F9742260FCADD008B5BBB /* main.cpp in Sources */,
 			);

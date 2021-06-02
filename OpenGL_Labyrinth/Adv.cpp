@@ -71,7 +71,7 @@ void Adv::reloadPosition() {
             arrayPosition[0] = j;
             break;
         }
-        else if(GLfloat(this->positionArray[j].x) - ERROR_RANGE <= GLfloat(advPosi.x) && GLfloat(this->positionArray[(j + 1)].x) > GLfloat(advPosi.x) + ERROR_RANGE){ // 0.001
+        else if(GLfloat(this->positionArray[0][j].x) - ERROR_RANGE <= GLfloat(advPosi.x) && GLfloat(this->positionArray[0][j + 1].x) > GLfloat(advPosi.x) + ERROR_RANGE){ // 0.001
             arrayPosition[0] = j;
             break;
         }
@@ -84,7 +84,7 @@ void Adv::reloadPosition() {
             arrayPosition[1] = i;
             break;
         }
-        else if(GLfloat(this->positionArray[i * conf.squareArrayWidth].y) <= GLfloat(advPosi.y) + ERROR_RANGE && (GLfloat(this->positionArray[(i + 1) * conf.squareArrayWidth].y)) > GLfloat(advPosi.y) + ERROR_RANGE){ // 0.01
+        else if(GLfloat(this->positionArray[i][0].y) <= GLfloat(advPosi.y) + ERROR_RANGE && (GLfloat(this->positionArray[i + 1][0].y) > GLfloat(advPosi.y) + ERROR_RANGE)){ // 0.01
             arrayPosition[1] = i;
             break;
         }

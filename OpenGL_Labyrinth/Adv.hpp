@@ -31,7 +31,7 @@ public:
     
     int arrayPosition[2] = {0, 0};
     Position advPosi;
-    Position* positionArray;
+    Position** positionArray;
     
     
     void advLoadTexture();

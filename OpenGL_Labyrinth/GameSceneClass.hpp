@@ -5,8 +5,8 @@
 //  Created by take on 2021/05/19.
 //
 
-#ifndef GameScemeClass_hpp
-#define GameScemeClass_hpp
+#ifndef GameSceneClass_hpp
+#define GameSceneClass_hpp
 
 #include "macro.h"
 #include "ObjectHeaderMacro.h"
@@ -19,7 +19,7 @@ class GameScene {
     //    Position* positionArray;
     
 public:
-    GameScene();
+    GameScene(int mode, int windowWidth, int windowHeight);
     virtual ~GameScene();
     
     void createPlayer();
@@ -33,4 +33,4 @@ public:
     void run(WindowClass* window);
 };
 
-#endif /* GameScemeClass_hpp */
+#endif /* GameSceneClass_hpp */

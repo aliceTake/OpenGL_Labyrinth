@@ -1,6 +1,6 @@
 #include "ShaderLoadFuncs.hpp"
 #include "WindowClass.hpp"
-#include "GameScemeClass.hpp"
+#include "GameSceneClass.hpp"
 
 using namespace std;
 
@@ -12,7 +12,7 @@ int main()
     
     WindowClass window;
     
-    GameScene gameScene;
+    GameScene gameScene(GAME_MODE_EASY, WINDOW_WIDTH, WINDOW_HEIGHT);
     
     // MARK: メインループ
     // 背景色を指定する
