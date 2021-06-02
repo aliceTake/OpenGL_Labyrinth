@@ -14,8 +14,10 @@ GameScene::GameScene(int mode, int windowWidth, int windowHeight)
     ConfigureDefine conf(mode, windowWidth, windowHeight);
     conf.configSetting();
     
-    advPointer = new Adv(Frame(conf.glObjectSize, conf.glObjectSize, -1.0, -1.0),conf); // window_height / 36 / 100
-    floorPointer = new MultipleSquare(Frame(conf.glObjectSize, conf.glObjectSize, -1.0, -1.0),conf); // 0.1325
+    const GLfloat objectSize = 0.1;
+    
+    advPointer = new Adv(Frame(conf.glObjectSize, conf.glObjectSize, -1.0, -1.0),conf);
+    floorPointer = new MultipleSquare(Frame(conf.glObjectSize, conf.glObjectSize, -1.0, -1.0),conf);
     
     floorPointer->floorLoadTexture();
     

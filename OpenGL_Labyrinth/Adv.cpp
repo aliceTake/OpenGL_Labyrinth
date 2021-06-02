@@ -8,8 +8,15 @@
 #include "Adv.hpp"
 
 Adv::Adv(Frame f, ConfigureDefine conf) : SquareShape(f) ,conf(conf)
-    { vertexInit(); createVbo(); advPosi.x = 0.0; advPosi.y = 0.0; this->program = loadProgram("advVS.vert", "advFS.frag"); this->aspectLoc = glGetUniformLocation(this->program, "aspect");
-    this->locationLoc = glGetUniformLocation(this->program, "location"); };
+{
+    vertexInit();
+    createVbo();
+    advPosi.x = 0.0;
+    advPosi.y = 0.0;
+    this->program = loadProgram("advVS.vert", "advFS.frag");
+    this->aspectLoc = glGetUniformLocation(this->program, "aspect");
+    this->locationLoc = glGetUniformLocation(this->program, "location");
+};
 
 
 

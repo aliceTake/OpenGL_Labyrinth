@@ -1,5 +1,6 @@
 #include "ShaderLoadFuncs.hpp"
 #include "WindowClass.hpp"
+#include "StartScene.hpp"
 #include "GameSceneClass.hpp"
 
 using namespace std;
@@ -12,7 +13,9 @@ int main()
     
     WindowClass window;
     
-    GameScene gameScene(GAME_MODE_EASY, WINDOW_WIDTH, WINDOW_HEIGHT);
+    StartScene startScene;
+    
+    GameScene gameScene(GAME_MODE_HARD, WINDOW_WIDTH, WINDOW_HEIGHT);
     
     // MARK: メインループ
     // 背景色を指定する
@@ -22,6 +25,7 @@ int main()
     // ウィンドウが開いている間繰り返す
     while (window.shouldClose() == GL_FALSE)
     {
+        startScene.run(&window);
         gameScene.run(&window);
     }
 }

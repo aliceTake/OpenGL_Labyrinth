@@ -187,4 +187,8 @@ MultipleSquare::~MultipleSquare() {
 
 Position* MultipleSquare::getPositionArray(int h, int w) {
     return &positionArray[h][w];
+    for (int i = 0; i < conf.squareArrayHeight; i++) {
+        delete this->positionArray[i];
+        delete this->state[i];
+    }
 }

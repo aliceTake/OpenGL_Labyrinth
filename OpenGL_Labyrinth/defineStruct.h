@@ -41,7 +41,7 @@ public:
             case GAME_MODE_NORMAL:
                 this->squareArrayWidth = 54;
                 this->squareArrayHeight = 30;
-                this->glObjectSize = 0.1316;
+                this->glObjectSize = 0.132;
                 break;
             case GAME_MODE_HARD:
                 this->squareArrayWidth = 72;
@@ -51,6 +51,7 @@ public:
             default:
                 this->squareArrayWidth = 36;
                 this->squareArrayHeight = 20;
+                this->glObjectSize = 0.2;
                 break;
         }
     }
