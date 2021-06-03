@@ -13,9 +13,12 @@ int main()
     
     WindowClass window;
     
-    StartScene startScene;
+    int gameMode = 0;
     
-    GameScene gameScene(GAME_MODE_HARD, WINDOW_WIDTH, WINDOW_HEIGHT);
+    
+    StartScene* startScene;
+    
+    GameScene* gameScene;
     
     // MARK: メインループ
     // 背景色を指定する
@@ -25,8 +28,13 @@ int main()
     // ウィンドウが開いている間繰り返す
     while (window.shouldClose() == GL_FALSE)
     {
-        startScene.run(&window);
-        gameScene.run(&window);
+        startScene = new StartScene;
+        gameMode = startScene->run(&window);
+        delete startScene;
+        
+        gameScene = new GameScene(gameMode, WINDOW_WIDTH, WINDOW_HEIGHT);
+        gameScene->run(&window);
+        delete gameScene;
     }
 }
 

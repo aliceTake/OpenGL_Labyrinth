@@ -164,7 +164,7 @@ void MultipleSquare::createStateData() {
 }
 
 void MultipleSquare::floorLoadTexture() {
-    this->loadTexture("floor.bmp", false);
+    this->loadTexture("floor.bmp", 32, 32, false);
     this->setTextureLocation(this->program);
     this->bindTexture(0);
 }

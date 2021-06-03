@@ -13,10 +13,17 @@
 class StartScene {
 public:
     int gameMode;
+    SquareShape* screen;
+    SquareShape* title;
+    SquareShape* easyButton;
+    SquareShape* nomalButton;
+    SquareShape* hardButton;
     
     StartScene();
     
-    void run(WindowClass* window);
+    ~StartScene();
+    
+    int run(WindowClass* window);
 };
 
 #endif /* StartScene_hpp */

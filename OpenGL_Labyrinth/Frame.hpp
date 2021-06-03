@@ -75,6 +75,6 @@ struct Color {
     GLfloat red, green, blue;
     
     Color()
-    : red(1.0), green(1.0), blue(1.0) {}
+    : red(0.0), green(0.0), blue(0.0) {}
 };
 #endif /* Frame_hpp */

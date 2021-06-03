@@ -7,10 +7,9 @@
 
 #include "Texture.hpp"
 
-    
 const GLuint Texture::getTexID(int texNum) const { return textureID[texNum]; }
     
-void Texture::loadTexture(std::string filename, bool isAlpha){
+void Texture::loadTexture(std::string filename, GLfloat width, GLfloat height, bool isAlpha){
         GLuint texID;
         // テクスチャIDの生成
         glGenTextures(1, &texID);
@@ -27,9 +26,9 @@ void Texture::loadTexture(std::string filename, bool isAlpha){
         glBindTexture(GL_TEXTURE_2D, texID);
         //    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 32, 32, 0, GL_BGR, GL_UNSIGNED_BYTE, data);
         if(isAlpha == true) {
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 32, 32, 0, GL_BGRA, GL_UNSIGNED_BYTE, textureBuffer);
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_BGRA, GL_UNSIGNED_BYTE, textureBuffer);
         } else {
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 32, 32, 0, GL_BGR, GL_UNSIGNED_BYTE, textureBuffer);
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_BGR, GL_UNSIGNED_BYTE, textureBuffer);
         }
 
 
@@ -46,7 +45,7 @@ void Texture::loadTexture(std::string filename, bool isAlpha){
         glBindTexture(GL_TEXTURE_2D, 0);
         
         textureID.push_back(texID);
-    }
+}
     
 void Texture::setTextureLocation(GLuint program) {
         int textureLocation = glGetUniformLocation(program, "texture");
@@ -54,5 +53,12 @@ void Texture::setTextureLocation(GLuint program) {
     }
     
 void Texture::bindTexture(int texNum) {
-        glBindTexture(GL_TEXTURE_2D, textureID[texNum]);
+    glBindTexture(GL_TEXTURE_2D, textureID[texNum]);
+}
+
+Texture::~Texture() {
+    for(int i = 0; i < textureID.size(); i++){
+        bindTexture(i);
+        glDeleteTextures(1, &textureID[i]);
     }
+}

@@ -14,8 +14,6 @@ GameScene::GameScene(int mode, int windowWidth, int windowHeight)
     ConfigureDefine conf(mode, windowWidth, windowHeight);
     conf.configSetting();
     
-    const GLfloat objectSize = 0.1;
-    
     advPointer = new Adv(Frame(conf.glObjectSize, conf.glObjectSize, -1.0, -1.0),conf);
     floorPointer = new MultipleSquare(Frame(conf.glObjectSize, conf.glObjectSize, -1.0, -1.0),conf);
     
