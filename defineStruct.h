@@ -1,4 +1,4 @@
-//
+﻿//
 //  defineStruct.h
 //  OpenGL_Labyrinth
 //

@@ -1,4 +1,4 @@
-//
+﻿//
 //  gameScemeClass.hpp
 //  OpenGL_Labyrinth
 //

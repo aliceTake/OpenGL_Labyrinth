@@ -1,4 +1,4 @@
-//
+﻿//
 //  MultipleSquare.hpp
 //  OpenGL_Labyrinth
 //

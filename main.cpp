@@ -1,4 +1,4 @@
-#include "ShaderLoadFuncs.hpp"
+﻿#include "ShaderLoadFuncs.hpp"
 #include "WindowClass.hpp"
 #include "StartScene.hpp"
 #include "GameSceneClass.hpp"

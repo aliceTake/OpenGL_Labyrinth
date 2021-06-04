@@ -1,4 +1,4 @@
-
+﻿
 #include "WindowClass.hpp"
 
 // コンストラクタ

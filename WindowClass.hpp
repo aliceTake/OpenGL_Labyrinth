@@ -1,4 +1,4 @@
-//
+﻿//
 //  Window.hpp
 //  OpenGL_Labyrinth
 //

@@ -1,4 +1,4 @@
-//
+﻿//
 //  StartScene.cpp
 //  OpenGL_Labyrinth
 //

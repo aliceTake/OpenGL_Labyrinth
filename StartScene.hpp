@@ -1,4 +1,4 @@
-//
+﻿//
 //  StartScene.hpp
 //  OpenGL_Labyrinth
 //

@@ -1,4 +1,4 @@
-//
+﻿//
 //  SquareShape.hpp
 //  OpenGL_Labyrinth
 //

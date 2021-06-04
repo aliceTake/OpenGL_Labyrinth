@@ -1,4 +1,4 @@
-//
+﻿//
 //  ObjectClass.hpp
 //  OpenGL_Labyrinth
 //
