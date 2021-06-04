@@ -8,8 +8,15 @@
 #include "Adv.hpp"
 
 Adv::Adv(Frame f, ConfigureDefine conf) : SquareShape(f) ,conf(conf)
-    { vertexInit(); createVbo(); advPosi.x = 0.0; advPosi.y = 0.0; this->program = loadProgram("advVS.vert", "advFS.frag"); this->aspectLoc = glGetUniformLocation(this->program, "aspect");
-    this->locationLoc = glGetUniformLocation(this->program, "location"); };
+{
+    vertexInit();
+    createVbo();
+    advPosi.x = 0.0;
+    advPosi.y = 0.0;
+    this->program = loadProgram("advVS.vert", "advFS.frag");
+    this->aspectLoc = glGetUniformLocation(this->program, "aspect");
+    this->locationLoc = glGetUniformLocation(this->program, "location");
+};
 
 
 
@@ -51,15 +58,15 @@ void Adv::createVbo() {
 }
 
 void Adv::advLoadTexture() {
-    this->loadTexture("adv.bmp", true);
-    this->loadTexture("adv1.bmp", true);
-    this->loadTexture("adv2.bmp", true);
-    this->loadTexture("adv3.bmp", true);
-    this->loadTexture("adv4.bmp", true);
-    this->loadTexture("adv5.bmp", true);
-    this->loadTexture("adv6.bmp", true);
-    this->loadTexture("adv7.bmp", true);
-    this->loadTexture("adv8.bmp", true);
+    this->loadTexture("adv.bmp", 32, 32, true);
+    this->loadTexture("adv1.bmp", 32, 32, true);
+    this->loadTexture("adv2.bmp", 32, 32, true);
+    this->loadTexture("adv3.bmp", 32, 32, true);
+    this->loadTexture("adv4.bmp", 32, 32, true);
+    this->loadTexture("adv5.bmp", 32, 32, true);
+    this->loadTexture("adv6.bmp", 32, 32, true);
+    this->loadTexture("adv7.bmp", 32, 32, true);
+    this->loadTexture("adv8.bmp", 32, 32, true);
     this->setTextureLocation(this->program);
 }
 
@@ -71,7 +78,7 @@ void Adv::reloadPosition() {
             arrayPosition[0] = j;
             break;
         }
-        else if(GLfloat(this->positionArray[j].x) - ERROR_RANGE <= GLfloat(advPosi.x) && GLfloat(this->positionArray[(j + 1)].x) > GLfloat(advPosi.x) + ERROR_RANGE){ // 0.001
+        else if(GLfloat(this->positionArray[0][j].x) - ERROR_RANGE <= GLfloat(advPosi.x) && GLfloat(this->positionArray[0][j + 1].x) > GLfloat(advPosi.x) + ERROR_RANGE){ // 0.001
             arrayPosition[0] = j;
             break;
         }
@@ -84,7 +91,7 @@ void Adv::reloadPosition() {
             arrayPosition[1] = i;
             break;
         }
-        else if(GLfloat(this->positionArray[i * conf.squareArrayWidth].y) <= GLfloat(advPosi.y) + ERROR_RANGE && (GLfloat(this->positionArray[(i + 1) * conf.squareArrayWidth].y)) > GLfloat(advPosi.y) + ERROR_RANGE){ // 0.01
+        else if(GLfloat(this->positionArray[i][0].y) <= GLfloat(advPosi.y) + ERROR_RANGE && (GLfloat(this->positionArray[i + 1][0].y) > GLfloat(advPosi.y) + ERROR_RANGE)){ // 0.01
             arrayPosition[1] = i;
             break;
         }

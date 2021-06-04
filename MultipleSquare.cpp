@@ -9,7 +9,25 @@
 
 MultipleSquare::MultipleSquare(Frame f, ConfigureDefine conf)
 : aspectedWidth( f.size.width * conf.reverseWindowAspect), conf(conf), SquareShape(f)
-{ vertexInit(); createVbo(); multipleVertexInit(); createpositionArrayVbo(); this->program = loadProgram("point.vert", "point.frag"); this->aspectLoc = glGetUniformLocation(this->program, "aspect"); }
+{
+    vertexInit();
+    createVbo();
+    
+    this->positionArray = new Position*[conf.squareArrayHeight];
+    for (int i = 0; i < conf.squareArrayHeight; i++) {
+        this->positionArray[i] = new Position[conf.squareArrayWidth];
+    }
+    
+    this->state = new GLfloat*[conf.squareArrayHeight];
+    for (int i = 0; i < conf.squareArrayHeight; i++) {
+        this->state[i] = new GLfloat[conf.squareArrayWidth];
+    }
+    
+    multipleVertexInit();
+    createpositionArrayVbo();
+    this->program = loadProgram("point.vert", "point.frag");
+    this->aspectLoc = glGetUniformLocation(this->program, "aspect");
+}
 
 void MultipleSquare::vertexInit()
 {
@@ -73,16 +91,35 @@ void MultipleSquare::createpositionArrayVbo() {
     bindVao();
     positionArrayInit();
     
+    Position array[conf.squareArrayHeight][conf.squareArrayWidth];
+    
+    for(int i = 0; i < conf.squareArrayHeight; i++) {
+        for(int j = 0; j < conf.squareArrayWidth; j++) {
+            array[i][j].x = positionArray[i][j].x;
+            array[i][j].y = positionArray[i][j].y;
+        }
+    }
+    
+    GLfloat stateArray[conf.squareArrayHeight][conf.squareArrayWidth];
+    
+    for(int i = 0; i < conf.squareArrayHeight; i++) {
+        for(int j = 0; j < conf.squareArrayWidth; j++) {
+            stateArray[i][j] = state[i][j];
+            stateArray[i][j] = state[i][j];
+        }
+    }
+    
     glEnableVertexAttribArray(2);
     glGenBuffers(1, &positionArrayVbo);
     glBindBuffer(GL_ARRAY_BUFFER, positionArrayVbo);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(positionArray),  &positionArray, GL_STATIC_DRAW);
+    //glBufferData(GL_ARRAY_BUFFER, sizeof(positionArray),  &positionArray, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Position) * conf.squareArrayHeight * conf.squareArrayWidth,  &array[0][0], GL_STATIC_DRAW);
     glVertexAttribPointer(2, 2, GL_DOUBLE, GL_FALSE, 0, 0);
     
     glEnableVertexAttribArray(3);
     glGenBuffers(1, &statusVbo);
     glBindBuffer(GL_ARRAY_BUFFER, statusVbo);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(state), state[0], GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * conf.squareArrayHeight * conf.squareArrayWidth, &stateArray[0][0], GL_STATIC_DRAW);
     glVertexAttribPointer(3, 1, GL_INT, GL_FALSE, 0, 0);
     
     glVertexAttribDivisor(0,0);
@@ -127,7 +164,7 @@ void MultipleSquare::createStateData() {
 }
 
 void MultipleSquare::floorLoadTexture() {
-    this->loadTexture("floor.bmp", false);
+    this->loadTexture("floor.bmp", 32, 32, false);
     this->setTextureLocation(this->program);
     this->bindTexture(0);
 }
@@ -150,4 +187,8 @@ MultipleSquare::~MultipleSquare() {
 
 Position* MultipleSquare::getPositionArray(int h, int w) {
     return &positionArray[h][w];
+    for (int i = 0; i < conf.squareArrayHeight; i++) {
+        delete this->positionArray[i];
+        delete this->state[i];
+    }
 }

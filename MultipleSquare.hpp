@@ -10,6 +10,7 @@
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include <vector>
 #include "Frame.hpp"
 #include "defineStruct.h"
 #include "Texture.hpp"
@@ -28,9 +29,10 @@ private:
 public:
     MultipleSquare(Frame f, ConfigureDefine conf);
     ConfigureDefine conf;
-    Position positionArray[SQUARE_ARRAY_HEIGHT][SQUARE_ARRAY_WIDTH]; // ここを動的確保にしたい
-    GLint state[SQUARE_ARRAY_HEIGHT][SQUARE_ARRAY_WIDTH];
-    
+//    Position positionArray[SQUARE_ARRAY_HEIGHT][SQUARE_ARRAY_WIDTH]; // ここを動的確保にしたい
+    Position** positionArray;
+//    GLint state[SQUARE_ARRAY_HEIGHT][SQUARE_ARRAY_WIDTH];
+    GLfloat** state;
     virtual ~MultipleSquare();
 
     void floorLoadTexture();

@@ -21,7 +21,7 @@ protected:
     GLuint uv_vbo;
     GLuint colorVbo;
     GLuint alphaVbo;
-    bool texureBindFrag;
+    bool texureBindFrag = false;
     GLdouble location[2];
     GLfloat fLocation[2];
     Color color[4];
@@ -43,6 +43,8 @@ public:
     SquareShape(GLdouble width, GLdouble height, Position p);
     
     virtual ~SquareShape();
+    
+    void setShaderProgram(GLuint program);
     
     void createSquare();
     

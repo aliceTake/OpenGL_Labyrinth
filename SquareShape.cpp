@@ -9,19 +9,19 @@
 
 
 SquareShape::SquareShape(Frame f)
-: location { 0.0, 0.0 }, fLocation { 0.0, 0.0 }, alpha{0.0, 0.0, 0.0, 0.0}, texureBindFrag(0) , frame(f.size, f.position)  { this->program = loadProgram("object.vert", "object.frag"); }
+: location { 0.0, 0.0 }, fLocation { 0.0, 0.0 }, alpha{0.0, 0.0, 0.0, 0.0}, texureBindFrag(false) , frame(f.size, f.position)  { this->program = loadProgram("object.vert", "object.frag"); }
 
 SquareShape::SquareShape(GLdouble width, GLdouble height, GLdouble x, GLdouble y)
-: location { 0.0, 0.0 }, fLocation { 0.0, 0.0 }, alpha{0.0, 0.0, 0.0, 0.0}, texureBindFrag(0), frame(width, height, x, y) { this->program = loadProgram("object.vert", "object.frag"); }
+: location { 0.0, 0.0 }, fLocation { 0.0, 0.0 }, alpha{0.0, 0.0, 0.0, 0.0}, texureBindFrag(false), frame(width, height, x, y) { this->program = loadProgram("object.vert", "object.frag"); }
 
 SquareShape::SquareShape(Size s, Position p)
-: location { 0.0, 0.0 }, fLocation { 0.0, 0.0 }, alpha{0.0, 0.0, 0.0, 0.0}, texureBindFrag(0), frame(s ,p) { this->program = loadProgram("object.vert", "object.frag"); }
+: location { 0.0, 0.0 }, fLocation { 0.0, 0.0 }, alpha{0.0, 0.0, 0.0, 0.0}, texureBindFrag(false), frame(s ,p) { this->program = loadProgram("object.vert", "object.frag"); }
 
 SquareShape::SquareShape(Size s, GLdouble x, GLdouble y)
-: location { 0.0, 0.0 }, fLocation { 0.0, 0.0 }, alpha{0.0, 0.0, 0.0, 0.0}, texureBindFrag(0), frame(s, x, y) { this->program = loadProgram("object.vert", "object.frag"); }
+: location { 0.0, 0.0 }, fLocation { 0.0, 0.0 }, alpha{0.0, 0.0, 0.0, 0.0}, texureBindFrag(false), frame(s, x, y) { this->program = loadProgram("object.vert", "object.frag"); }
 
 SquareShape::SquareShape(GLdouble width, GLdouble height, Position p)
-: location { 0.0, 0.0 }, fLocation { 0.0, 0.0 }, alpha{0.0, 0.0, 0.0, 0.0}, texureBindFrag(0), frame(width, height, p) { this->program = loadProgram("object.vert", "object.frag"); }
+: location { 0.0, 0.0 }, fLocation { 0.0, 0.0 }, alpha{0.0, 0.0, 0.0, 0.0}, texureBindFrag(false), frame(width, height, p) { this->program = loadProgram("object.vert", "object.frag"); }
 
 SquareShape::~SquareShape() {
     glDeleteVertexArrays(1, &vao);
@@ -29,6 +29,11 @@ SquareShape::~SquareShape() {
     glDeleteBuffers(1, &uv_vbo);
     glDeleteBuffers(1, &colorVbo);
     glDeleteBuffers(1, &alphaVbo);
+    glDeleteProgram(this->program);
+}
+
+void SquareShape::setShaderProgram(GLuint program) {
+    this->program = program;
 }
 
 void SquareShape::createSquare() {
@@ -60,7 +65,7 @@ void SquareShape::createVbo() {
     glGenBuffers(1, &uv_vbo);
     glBindBuffer(GL_ARRAY_BUFFER, uv_vbo);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertex_uv), &vertex_uv, GL_STATIC_DRAW);
-    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, 0);
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (char *)0 + sizeof(GLfloat) * 8);
     
     glEnableVertexAttribArray(2);
     glGenBuffers(1, &colorVbo);

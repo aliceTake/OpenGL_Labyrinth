@@ -12,5 +12,11 @@ uniform sampler2D Texture;
 
 void main()
 {
-    fragment = texture(Texture, Flag_uv).rgba + vec4(color_frag, 0.0) - Al;
+    if(texture(Texture, Flag_uv).a == 0.0){
+        fragment = vec4(color_frag, Al);// + vec4(0.0,0.0,0.0,Al);
+    }
+    else {
+        fragment = texture(Texture, Flag_uv).rgba;
+//        fragment = texture(Texture, Flag_uv).rgba + vec4(color_frag, 0.0) - Al;
+    }
 }
