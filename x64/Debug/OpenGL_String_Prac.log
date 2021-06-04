@@ -1,13 +1,7 @@
-﻿  Frame.cpp
-  GameScemeClass.cpp
-  Object.cpp
-C:\Users\take\source\repos\OpenGL_String_Prac\Object.cpp(78,16): warning C4244: '初期化中': 'GLdouble' から 'GLfloat' への変換です。データが失われる可能性があります。
-C:\Users\take\source\repos\OpenGL_String_Prac\Object.cpp(139,33): warning C4244: '=': 'double' から 'GLint' への変換です。データが失われる可能性があります。
-C:\Users\take\source\repos\OpenGL_String_Prac\Object.cpp(149,37): warning C4244: '=': 'double' から 'GLint' への変換です。データが失われる可能性があります。
-C:\Users\take\source\repos\OpenGL_String_Prac\Object.cpp(152,37): warning C4244: '=': 'double' から 'GLint' への変換です。データが失われる可能性があります。
-C:\Users\take\source\repos\OpenGL_String_Prac\Object.cpp(279,42): warning C4244: '=': 'GLdouble' から 'GLfloat' への変換です。データが失われる可能性があります。
-C:\Users\take\source\repos\OpenGL_String_Prac\Object.cpp(280,42): warning C4244: '=': 'GLdouble' から 'GLfloat' への変換です。データが失われる可能性があります。
-  Texture.cpp
-  WindowClass.cpp
-  コードを生成中...
+﻿  MultipleSquare.cpp
+C:\Users\take\source\repos\OpenGL_String_Prac\defineStruct.h(39,1): warning C4305: '=': 'double' から 'GLfloat' へ切り詰めます。
+C:\Users\take\source\repos\OpenGL_String_Prac\defineStruct.h(44,1): warning C4305: '=': 'double' から 'GLfloat' へ切り詰めます。
+C:\Users\take\source\repos\OpenGL_String_Prac\defineStruct.h(49,1): warning C4305: '=': 'double' から 'GLfloat' へ切り詰めます。
+C:\Users\take\source\repos\OpenGL_String_Prac\defineStruct.h(54,1): warning C4305: '=': 'double' から 'GLfloat' へ切り詰めます。
+C:\Users\take\source\repos\OpenGL_String_Prac\MultipleSquare.cpp(11,16): warning C4244: '初期化中': 'GLdouble' から 'GLfloat' への変換です。データが失われる可能性があります。
   OpenGL_String_Prac.vcxproj -> C:\Users\take\source\repos\OpenGL_String_Prac\x64\Debug\OpenGL_String_Prac.exe

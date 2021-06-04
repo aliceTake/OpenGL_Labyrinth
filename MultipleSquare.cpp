@@ -24,7 +24,7 @@ MultipleSquare::MultipleSquare(Frame f, ConfigureDefine conf)
     }
     
     multipleVertexInit();
-    createpositionArrayVbo();
+    createpositionArrayVbo(conf.squareArrayHeight , conf.squareArrayWidth);
     this->program = loadProgram("point.vert", "point.frag");
     this->aspectLoc = glGetUniformLocation(this->program, "aspect");
 }
@@ -87,39 +87,40 @@ void MultipleSquare::multipleVertexInit()
     
 }
 
-void MultipleSquare::createpositionArrayVbo() {
+void MultipleSquare::createpositionArrayVbo(const int height, const int width) {
     bindVao();
     positionArrayInit();
-    
-    Position array[conf.squareArrayHeight][conf.squareArrayWidth];
+
+
+    Position* array = new Position[height * width * 2 ];
     
     for(int i = 0; i < conf.squareArrayHeight; i++) {
         for(int j = 0; j < conf.squareArrayWidth; j++) {
-            array[i][j].x = positionArray[i][j].x;
-            array[i][j].y = positionArray[i][j].y;
+            array[i * width + j].x = positionArray[i][j].x;
+            array[i * width + j].y = positionArray[i][j].y;
         }
     }
     
-    GLfloat stateArray[conf.squareArrayHeight][conf.squareArrayWidth];
+    GLfloat* stateArray = new GLfloat[height * width * 2];
     
     for(int i = 0; i < conf.squareArrayHeight; i++) {
         for(int j = 0; j < conf.squareArrayWidth; j++) {
-            stateArray[i][j] = state[i][j];
-            stateArray[i][j] = state[i][j];
+            stateArray[i * width + j] = state[i][j];
+            stateArray[i * width + j] = state[i][j];
         }
     }
     
     glEnableVertexAttribArray(2);
     glGenBuffers(1, &positionArrayVbo);
     glBindBuffer(GL_ARRAY_BUFFER, positionArrayVbo);
-    //glBufferData(GL_ARRAY_BUFFER, sizeof(positionArray),  &positionArray, GL_STATIC_DRAW);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(Position) * conf.squareArrayHeight * conf.squareArrayWidth,  &array[0][0], GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(positionArray),  &positionArray, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Position) * conf.squareArrayHeight * conf.squareArrayWidth,  array, GL_STATIC_DRAW);
     glVertexAttribPointer(2, 2, GL_DOUBLE, GL_FALSE, 0, 0);
     
     glEnableVertexAttribArray(3);
     glGenBuffers(1, &statusVbo);
     glBindBuffer(GL_ARRAY_BUFFER, statusVbo);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * conf.squareArrayHeight * conf.squareArrayWidth, &stateArray[0][0], GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * conf.squareArrayHeight * conf.squareArrayWidth, stateArray, GL_STATIC_DRAW);
     glVertexAttribPointer(3, 1, GL_INT, GL_FALSE, 0, 0);
     
     glVertexAttribDivisor(0,0);
@@ -128,6 +129,9 @@ void MultipleSquare::createpositionArrayVbo() {
     glVertexAttribDivisor(3,1);
     
     glBindVertexArray(0);
+
+    delete[] array;
+    delete[] stateArray;
 }
 
 void MultipleSquare::positionArrayInit() {

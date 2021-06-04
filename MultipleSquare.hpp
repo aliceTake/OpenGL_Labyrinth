@@ -39,7 +39,7 @@ public:
     
     void multipleVertexInit();
     
-    void createpositionArrayVbo();
+    void createpositionArrayVbo(const int height, const int width);
     
     void positionArrayInit();
     
