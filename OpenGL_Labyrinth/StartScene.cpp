@@ -9,16 +9,16 @@
 
 StartScene::StartScene() {
     
-    GLuint program = loadProgram("object.vert", "object.frag");
-    GLuint screenProgram = loadProgram("object.vert", "noTexture.frag");
+    program = loadProgram("object.vert", "object.frag");
+    screenProgram = loadProgram("object.vert", "noTexture.frag");
     
     const GLfloat screenSize = 2.0;
     
     screen = new SquareShape(Frame(screenSize, screenSize, -1.0, -1.0));
     screen->createSquare();
     screen->setShaderProgram(screenProgram);
-    screen->changeColor(0.5, 0.7, 0.5);
-    screen->changeAlpha(1.0);
+    screen->changeColor(0.0, 0.0, 0.0);
+    screen->changeAlpha(0.0);
     
     const GLfloat titleHeght = (screenSize / 8.0) * 3.0;
     title = new SquareShape(Frame(screenSize, titleHeght, -1.0, 0.25));
@@ -31,6 +31,7 @@ StartScene::StartScene() {
     const GLfloat buttonWidth = screenSize / 2.0;
     const GLfloat buttonHeight = screenSize / 16.0;
     const GLfloat buttonX = -1.0 + screenSize / 4.0;
+    
     GLfloat buttonY = -1.0 + screenSize - titleHeght - 0.1; // 3/4
     
     easyButton = new SquareShape(Frame(buttonWidth, buttonHeight, buttonX, buttonY));
@@ -38,7 +39,7 @@ StartScene::StartScene() {
     easyButton->loadTexture("startSceneTexture/easy.bmp", 800, 67, true);
     easyButton->setTextureLocation(program);
     easyButton->setBindTexture(true);
-    easyButton->changeAlpha(0.0);
+    easyButton->changeAlpha(1.0);
     easyButton->changeColor(1.0, 1.0, 1.0);
     
     buttonY = ((buttonY + 1.0) / 3.0);
@@ -48,7 +49,7 @@ StartScene::StartScene() {
     nomalButton->loadTexture("startSceneTexture/nomal.bmp", 800, 67, true);
     nomalButton->setTextureLocation(program);
     nomalButton->setBindTexture(true);
-    nomalButton->changeAlpha(0.0);
+    nomalButton->changeAlpha(1.0);
     nomalButton->changeColor(1.0, 1.0, 1.0);
     
     hardButton = new SquareShape(Frame(buttonWidth, buttonHeight, buttonX, buttonY - 1.0));
@@ -56,8 +57,16 @@ StartScene::StartScene() {
     hardButton->loadTexture("startSceneTexture/hard.bmp", 800, 67, true);
     hardButton->setTextureLocation(program);
     hardButton->setBindTexture(true);
-    hardButton->changeAlpha(0.0);
+    hardButton->changeAlpha(1.0);
     hardButton->changeColor(1.0, 1.0, 1.0);
+    
+    key = new SquareShape(Frame(0.08, 0.1422, 0.1, easyButton->frame.position.y - 0.01));
+    key->createSquare();
+    key->loadTexture("startSceneTexture/key.bmp", 32, 32, true);
+    key->setTextureLocation(program);
+    key->setBindTexture(true);
+    key->changeAlpha(1.0);
+    key->changeColor(1.0, 1.0, 1.0);
     
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_BLEND);
@@ -80,6 +89,7 @@ int StartScene::run(WindowClass* window) {
         easyButton->draw();
         nomalButton->draw();
         hardButton->draw();
+        key->draw();
         
         if(glfwGetMouseButton(window->getWindowInstance(), GLFW_MOUSE_BUTTON_1) != GLFW_RELEASE) {
             glfwGetCursorPos(window->getWindowInstance(), &x, &y);
@@ -114,4 +124,7 @@ StartScene::~StartScene() {
     delete easyButton;
     delete nomalButton;
     delete hardButton;
+    delete key;
+    glDeleteProgram(this->program);
+    glDeleteProgram(this->screenProgram);
 }

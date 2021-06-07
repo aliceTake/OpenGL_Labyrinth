@@ -2,6 +2,7 @@
 #include "WindowClass.hpp"
 #include "StartScene.hpp"
 #include "GameSceneClass.hpp"
+#include <cstdlib>
 
 using namespace std;
 
@@ -15,9 +16,7 @@ int main()
     
     int gameMode = 0;
     
-    
     StartScene* startScene;
-    
     GameScene* gameScene;
     
     // MARK: メインループ
@@ -35,6 +34,8 @@ int main()
         gameScene = new GameScene(gameMode, WINDOW_WIDTH, WINDOW_HEIGHT);
         gameScene->run(&window);
         delete gameScene;
+        
+        cout << "true" << endl;
     }
 }
 

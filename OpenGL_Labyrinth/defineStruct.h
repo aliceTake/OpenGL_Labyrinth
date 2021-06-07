@@ -19,6 +19,7 @@ struct ConfigureDefine{
     int squareArrayHeight;
     int windowWidth;
     int windowHeight;
+    int goalPosition[2];
     GLfloat windowAspect;
     GLfloat reverseWindowAspect;
     Size objectSize;
@@ -26,7 +27,7 @@ struct ConfigureDefine{
     
 public:
     ConfigureDefine()
-    : mode(0),squareArrayWidth(0),squareArrayHeight(0),windowWidth(0),windowHeight(0),windowAspect(0),reverseWindowAspect(0),objectSize(0,0),glObjectSize(0.0){}
+    : mode(0),squareArrayWidth(0),squareArrayHeight(0),windowWidth(0),windowHeight(0),windowAspect(0),reverseWindowAspect(0),objectSize(0,0),glObjectSize(0.0),goalPosition{0,0}{}
     
     ConfigureDefine(int mode, int winWidth, int winHeight)
     : windowWidth(winWidth),windowHeight(winHeight),mode(mode)
@@ -37,21 +38,29 @@ public:
                 this->squareArrayWidth = 36;
                 this->squareArrayHeight = 20;
                 this->glObjectSize = 0.2;
+                this->goalPosition[0] = 35;
+                this->goalPosition[1] = 17;
                 break;
             case GAME_MODE_NORMAL:
                 this->squareArrayWidth = 54;
                 this->squareArrayHeight = 30;
                 this->glObjectSize = 0.132;
+                this->goalPosition[0] = 53;
+                this->goalPosition[1] = 26;
                 break;
             case GAME_MODE_HARD:
                 this->squareArrayWidth = 72;
                 this->squareArrayHeight = 40;
                 this->glObjectSize = 0.1;
+                this->goalPosition[0] = 71;
+                this->goalPosition[1] = 37;
                 break;
             default:
                 this->squareArrayWidth = 36;
                 this->squareArrayHeight = 20;
                 this->glObjectSize = 0.2;
+                this->goalPosition[0] = 35;
+                this->goalPosition[1] = 17;
                 break;
         }
     }

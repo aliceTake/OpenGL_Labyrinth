@@ -32,9 +32,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		E120DDD62654CB4A00D95D38 /* adv6.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = adv6.bmp; sourceTree = "<group>"; };
-		E120DDD72654CB4A00D95D38 /* adv8.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = adv8.bmp; sourceTree = "<group>"; };
-		E120DDD82654CB4A00D95D38 /* adv7.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = adv7.bmp; sourceTree = "<group>"; };
 		E120DDDA2654D04200D95D38 /* defineStruct.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = defineStruct.h; sourceTree = "<group>"; };
 		E120DDDB2654D06400D95D38 /* GameSceneClass.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GameSceneClass.cpp; sourceTree = "<group>"; };
 		E120DDDC2654D06400D95D38 /* GameSceneClass.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GameSceneClass.hpp; sourceTree = "<group>"; };
@@ -45,11 +42,11 @@
 		E120DDEC2654D3A900D95D38 /* ShaderLoadFuncs.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ShaderLoadFuncs.hpp; sourceTree = "<group>"; };
 		E124C8A92667E4730036C7E6 /* StartScene.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = StartScene.cpp; sourceTree = "<group>"; };
 		E124C8AA2667E4730036C7E6 /* StartScene.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = StartScene.hpp; sourceTree = "<group>"; };
-		E12FED35261A80E90002FFAB /* adv.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = adv.bmp; sourceTree = "<group>"; };
 		E12FED36261A80E90002FFAB /* nekoc32.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = nekoc32.bmp; sourceTree = "<group>"; };
-		E147A6C7262139C700484FA2 /* adv1.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = adv1.bmp; sourceTree = "<group>"; };
-		E147A6C8262139C700484FA2 /* adv2.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = adv2.bmp; sourceTree = "<group>"; };
-		E147A6C9262139C700484FA2 /* adv3.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = adv3.bmp; sourceTree = "<group>"; };
+		E15B0810266BE3C00057B2AC /* easyMap.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = easyMap.txt; sourceTree = "<group>"; };
+		E15B0812266BEEFA0057B2AC /* nomalMap.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = nomalMap.txt; sourceTree = "<group>"; };
+		E15B0814266BF00A0057B2AC /* hardMap.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = hardMap.txt; sourceTree = "<group>"; };
+		E16B9487266BCE8400650862 /* advTexture */ = {isa = PBXFileReference; lastKnownFileType = folder; path = advTexture; sourceTree = "<group>"; };
 		E1769F6026186F1F00158A6E /* floor.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = floor.bmp; sourceTree = "<group>"; };
 		E17F973E260FCADD008B5BBB /* OpenGL_Labyrinth */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = OpenGL_Labyrinth; sourceTree = BUILT_PRODUCTS_DIR; };
 		E17F9741260FCADD008B5BBB /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
@@ -57,8 +54,6 @@
 		E17F974C260FCE58008B5BBB /* point.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = point.frag; sourceTree = "<group>"; };
 		E181218B2655B6CE003D2444 /* Frame.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Frame.cpp; sourceTree = "<group>"; };
 		E181218C2655B6CE003D2444 /* Frame.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Frame.hpp; sourceTree = "<group>"; };
-		E1BD845A26528827006A72F0 /* adv4.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = adv4.bmp; path = "../../../迷路素材/adv4.bmp"; sourceTree = "<group>"; };
-		E1BD845B26528827006A72F0 /* adv5.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; name = adv5.bmp; path = "../../../迷路素材/adv5.bmp"; sourceTree = "<group>"; };
 		E1CA6DCA265E1A6200D69862 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		E1D3277E261ECCE100CCB9A3 /* macro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = macro.h; sourceTree = "<group>"; };
 		E1D32780261EE38F00CCB9A3 /* advVS.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = advVS.vert; sourceTree = "<group>"; };
@@ -137,17 +132,12 @@
 				E1E197702664CA010091E5C9 /* object.vert */,
 				E1E197722664D00F0091E5C9 /* object.frag */,
 				E1E3EEE6266939520067A825 /* noTexture.frag */,
+				E15B0810266BE3C00057B2AC /* easyMap.txt */,
+				E15B0812266BEEFA0057B2AC /* nomalMap.txt */,
+				E15B0814266BF00A0057B2AC /* hardMap.txt */,
+				E16B9487266BCE8400650862 /* advTexture */,
 				E1E3EEE4266913670067A825 /* startSceneTexture */,
 				E1769F6026186F1F00158A6E /* floor.bmp */,
-				E12FED35261A80E90002FFAB /* adv.bmp */,
-				E147A6C7262139C700484FA2 /* adv1.bmp */,
-				E147A6C8262139C700484FA2 /* adv2.bmp */,
-				E147A6C9262139C700484FA2 /* adv3.bmp */,
-				E1BD845A26528827006A72F0 /* adv4.bmp */,
-				E1BD845B26528827006A72F0 /* adv5.bmp */,
-				E120DDD62654CB4A00D95D38 /* adv6.bmp */,
-				E120DDD82654CB4A00D95D38 /* adv7.bmp */,
-				E120DDD72654CB4A00D95D38 /* adv8.bmp */,
 				E12FED36261A80E90002FFAB /* nekoc32.bmp */,
 			);
 			path = OpenGL_Labyrinth;

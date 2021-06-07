@@ -14,8 +14,10 @@ GameScene::GameScene(int mode, int windowWidth, int windowHeight)
     ConfigureDefine conf(mode, windowWidth, windowHeight);
     conf.configSetting();
     
-    advPointer = new Adv(Frame(conf.glObjectSize, conf.glObjectSize, -1.0, -1.0),conf);
     floorPointer = new MultipleSquare(Frame(conf.glObjectSize, conf.glObjectSize, -1.0, -1.0),conf);
+    
+    const GLfloat advFirstPosition = GLfloat(floorPointer->positionArray[1][0].y);
+    advPointer = new Adv(Frame(conf.glObjectSize, conf.glObjectSize, -1.0, advFirstPosition),conf);
     
     floorPointer->floorLoadTexture();
     
@@ -33,6 +35,7 @@ BlockCollision GameScene::hitCheck(){
     BlockCollision bc;
 
     std::cout << advPointer->arrayPosition[1] << " " << advPointer->arrayPosition[0] << std::endl;
+    
     // 上判定
     if(advPointer->arrayPosition[1] == floorPointer->conf.squareArrayHeight - 1){
         if(1.0 <= GLfloat(advPointer->advPosi.y) + advPointer->conf.objectSize.height + ERROR_RANGE) {
@@ -189,10 +192,17 @@ void GameScene::textureChangeByKey(GLFWwindow* window, int count){
     }
 }
 
+void GameScene::goalChack() {
+    if(floorPointer->conf.goalPosition[0] == advPointer->arrayPosition[0] && floorPointer->conf.goalPosition[1] == advPointer->arrayPosition[1])
+    {
+        goalFrag = true;
+    }
+}
+
 void GameScene::run(WindowClass* window) {
     unsigned int count = 0;
     
-    while (glfwGetKey(window->getWindowInstance(), GLFW_KEY_ESCAPE) == GL_FALSE) {
+    while (glfwGetKey(window->getWindowInstance(), GLFW_KEY_X) == GLFW_RELEASE && this->goalFrag == false) {
         count++;
         count = (11 + count) % 11;
         glClear(GL_COLOR_BUFFER_BIT);
@@ -209,6 +219,9 @@ void GameScene::run(WindowClass* window) {
         glUseProgram(0);
         
         window->swapBuffers();
+        
+        goalChack();
+        std::cout << this->goalFrag << std::endl;
     }
 }
 
