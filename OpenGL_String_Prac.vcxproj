@@ -131,39 +131,53 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\OpenGL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\OpenGL\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glfw3.lib;libglew32d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Adv.cpp" />
     <ClCompile Include="Frame.cpp" />
-    <ClCompile Include="GameScemeClass.cpp" />
+    <ClCompile Include="GameSceneClass.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Object.cpp" />
+    <ClCompile Include="MultipleSquare.cpp" />
     <ClCompile Include="shaderLoadFuncs.cpp" />
+    <ClCompile Include="SquareShape.cpp" />
+    <ClCompile Include="StartScene.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="WindowClass.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="advFS.frag" />
     <None Include="advVS.vert" />
+    <None Include="noTexture.frag" />
+    <None Include="object.frag" />
+    <None Include="object.vert" />
     <None Include="point.frag" />
     <None Include="point.vert" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Adv.hpp" />
     <ClInclude Include="defineStruct.h" />
     <ClInclude Include="Frame.hpp" />
     <ClInclude Include="GameScemeClass.hpp" />
+    <ClInclude Include="GameSceneClass.hpp" />
     <ClInclude Include="macro.h" />
-    <ClInclude Include="Object.hpp" />
+    <ClInclude Include="MultipleSquare.hpp" />
+    <ClInclude Include="ObjectHeaderMacro.h" />
     <ClInclude Include="shaderLoadFuncs.h" />
     <ClInclude Include="ShaderLoadFuncs.hpp" />
+    <ClInclude Include="SquareShape.hpp" />
+    <ClInclude Include="StartScene.hpp" />
     <ClInclude Include="Texture.hpp" />
     <ClInclude Include="WindowClass.hpp" />
   </ItemGroup>
