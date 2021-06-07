@@ -25,6 +25,7 @@ MultipleSquare::MultipleSquare(Frame f, ConfigureDefine conf)
     
     multipleVertexInit();
     createpositionArrayVbo(conf.squareArrayHeight, conf.squareArrayWidth);
+    glDeleteProgram(this->program);
     this->program = loadProgram("point.vert", "point.frag");
     this->aspectLoc = glGetUniformLocation(this->program, "aspect");
 }
@@ -88,7 +89,7 @@ void MultipleSquare::multipleVertexInit()
 }
 void MultipleSquare::createpositionArrayVbo(const int height, const int width) {
     bindVao();
-    createStateData();
+    stateInit();
     mapLoad(height, width);
     positionArrayInit();
     
@@ -113,7 +114,7 @@ void MultipleSquare::createpositionArrayVbo(const int height, const int width) {
     glEnableVertexAttribArray(2);
     glGenBuffers(1, &positionArrayVbo);
     glBindBuffer(GL_ARRAY_BUFFER, positionArrayVbo);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(positionArray),  &positionArray, GL_STATIC_DRAW);
+//    glBufferData(GL_ARRAY_BUFFER, sizeof(positionArray),  &positionArray, GL_STATIC_DRAW);
     glBufferData(GL_ARRAY_BUFFER, sizeof(Position) * conf.squareArrayHeight * conf.squareArrayWidth,  array, GL_STATIC_DRAW);
     glVertexAttribPointer(2, 2, GL_DOUBLE, GL_FALSE, 0, 0);
     
@@ -227,6 +228,7 @@ void MultipleSquare::draw() {
     bindTexture(0);
     glDrawArraysInstanced(GL_TRIANGLE_FAN, 0, 4, conf.squareArrayWidth * conf.squareArrayHeight);
     glBindVertexArray(0);
+    glBindTexture(GL_TEXTURE_2D, 0);
     glUseProgram(0);
 }
 
@@ -236,10 +238,13 @@ Position* MultipleSquare::getPositionArray(int h, int w) {
 
 // MARK: デストラクタ
 MultipleSquare::~MultipleSquare() {
+    glBindVertexArray(0);
     glDeleteBuffers(1, &positionArrayVbo);
     glDeleteBuffers(1, &statusVbo);
     for(int i = 0; i < conf.squareArrayHeight; i++) {
-        delete this->positionArray[i];
-        delete this->state[i];
+        delete[] this->positionArray[i];
+        delete[] this->state[i];
     }
+    delete[] this->positionArray;
+    delete[] this->state;
 }

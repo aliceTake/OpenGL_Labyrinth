@@ -63,7 +63,14 @@ static const GLfloat vertex_uv[] =
     1.0f, 0.0f,
     1.0f, 1.0f,
     0.0f, 1.0f
-    
+};
+
+static const GLfloat vertex_uv1[] =
+{
+    0.0f, 0.0f,
+    1.0f, 0.0f,
+    1.0f, 1.0f,
+    0.0f, 1.0f
 };
 
 struct BlockCollision {

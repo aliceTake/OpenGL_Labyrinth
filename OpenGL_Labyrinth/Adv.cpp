@@ -13,6 +13,7 @@ Adv::Adv(Frame f, ConfigureDefine conf) : SquareShape(f) ,conf(conf)
     createVbo();
     advPosi.x = 0.0;
     advPosi.y = 0.0;
+    glDeleteProgram(this->program);
     this->program = loadProgram("advVS.vert", "advFS.frag");
     this->aspectLoc = glGetUniformLocation(this->program, "aspect");
     this->locationLoc = glGetUniformLocation(this->program, "location");
@@ -180,5 +181,5 @@ void Adv::set_fLocation(){
 }
 
 Adv::~Adv() {
-    
+    positionArray = NULL;
 }

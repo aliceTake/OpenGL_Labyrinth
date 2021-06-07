@@ -9,7 +9,7 @@
 
 
 SquareShape::SquareShape(Frame f)
-: location { 0.0, 0.0 }, fLocation { 0.0, 0.0 }, alpha{0.0, 0.0, 0.0, 0.0}, texureBindFrag(false) , frame(f.size, f.position)  { this->program = loadProgram("object.vert", "object.frag"); }
+: location { 0.0, 0.0 }, fLocation { 0.0, 0.0 }, alpha{0.0, 0.0, 0.0, 0.0}, texureBindFrag(false) , frame(f.size, f.position)  { this->program = loadProgram("object.vert", "object.frag");}
 
 SquareShape::SquareShape(GLdouble width, GLdouble height, GLdouble x, GLdouble y)
 : location { 0.0, 0.0 }, fLocation { 0.0, 0.0 }, alpha{0.0, 0.0, 0.0, 0.0}, texureBindFrag(false), frame(width, height, x, y) { this->program = loadProgram("object.vert", "object.frag"); }
@@ -24,15 +24,24 @@ SquareShape::SquareShape(GLdouble width, GLdouble height, Position p)
 : location { 0.0, 0.0 }, fLocation { 0.0, 0.0 }, alpha{0.0, 0.0, 0.0, 0.0}, texureBindFrag(false), frame(width, height, p) { this->program = loadProgram("object.vert", "object.frag"); }
 
 SquareShape::~SquareShape() {
-    glDeleteVertexArrays(1, &vao);
+    glBindVertexArray(0);
+    glBindBuffer(GL_ARRAY_BUFFER,0);
+    glDisableVertexAttribArray(0);
+    std::cout << &vbo << std::endl;
     glDeleteBuffers(1, &vbo);
+    glDisableVertexAttribArray(1);
     glDeleteBuffers(1, &uv_vbo);
+    glDisableVertexAttribArray(2);
     glDeleteBuffers(1, &colorVbo);
+    glDisableVertexAttribArray(3);
     glDeleteBuffers(1, &alphaVbo);
     glDeleteProgram(this->program);
+//    glDeleteVertexArrays(1, &vao);
 }
 
 void SquareShape::setShaderProgram(GLuint program) {
+    glDeleteProgram(this->program);
+    this->program = NULL;
     this->program = program;
 }
 
@@ -50,6 +59,7 @@ void SquareShape::bindVbo() {
 }
 
 void SquareShape::createVbo() {
+    
     glGenVertexArrays(1, &vao);
     bindVao();
     
@@ -64,8 +74,8 @@ void SquareShape::createVbo() {
     glEnableVertexAttribArray(1);
     glGenBuffers(1, &uv_vbo);
     glBindBuffer(GL_ARRAY_BUFFER, uv_vbo);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertex_uv), &vertex_uv, GL_STATIC_DRAW);
-    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (char *)0 + sizeof(GLfloat) * 8);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertex_uv1), &vertex_uv1, GL_STATIC_DRAW);
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, 0);//(char *)0 + sizeof(GLfloat) * 8);
     
     glEnableVertexAttribArray(2);
     glGenBuffers(1, &colorVbo);
@@ -103,11 +113,11 @@ void SquareShape::changeColor(GLfloat red, GLfloat green, GLfloat blue) {
         color[i].green = green;
         color[i].blue = blue;
     }
-        bindVao();
-        
-        glBindBuffer(GL_ARRAY_BUFFER, colorVbo);
-        glBufferData(GL_ARRAY_BUFFER, sizeof(color), color, GL_STATIC_DRAW);
-        glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, 0);
+    bindVao();
+    
+    glBindBuffer(GL_ARRAY_BUFFER, colorVbo);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(color), color, GL_STATIC_DRAW);
+    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, 0);
 }
 
 void SquareShape::changeAlpha(GLfloat alpha) {
@@ -131,6 +141,7 @@ void SquareShape::draw() {
     glUseProgram(this->program);
     if(this->texureBindFrag) this->bindTexture(0);
     else glBindTexture(GL_TEXTURE_2D, 0);
+//    glBindTexture(GL_TEXTURE_2D, 0);
     bindVao();
     glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
     glBindTexture(GL_TEXTURE_2D, 0);

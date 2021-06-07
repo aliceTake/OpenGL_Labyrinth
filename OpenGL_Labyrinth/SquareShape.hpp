@@ -28,9 +28,13 @@ protected:
     GLfloat alpha[4];
     GLuint program;
     
+    void vertexInit();
+    void createVbo();
+    void bindVbo();
+    
 public:
-    Vertex vertex; // publicなのでゲッターセッターを作る、作ったらこのコメント消す
-    Frame frame;   // publicなのでゲッターセッターを作る、作ったらこのコメント消す
+    Vertex vertex;
+    Frame frame;
     
     SquareShape(Frame f);
     
@@ -46,15 +50,9 @@ public:
     
     void setShaderProgram(GLuint program);
     
-    void createSquare();
-    
     void bindVao();
     
-    void bindVbo();
-    
-    void createVbo();
-    
-    void vertexInit();
+    void createSquare();
     
     void setBindTexture(bool set);
     

@@ -57,8 +57,9 @@ void Texture::bindTexture(int texNum) {
 }
 
 Texture::~Texture() {
+    glBindTexture(GL_TEXTURE_2D, 0);
     for(int i = 0; i < textureID.size(); i++){
-        bindTexture(i);
+//        bindTexture(i);
         glDeleteTextures(1, &textureID[i]);
     }
 }

@@ -7,7 +7,6 @@
 
 #include "GameSceneClass.hpp"
 
-
 GameScene::GameScene(int mode, int windowWidth, int windowHeight)
 {
     
@@ -33,8 +32,8 @@ GameScene::GameScene(int mode, int windowWidth, int windowHeight)
 BlockCollision GameScene::hitCheck(){
     advPointer->reloadPosition();
     BlockCollision bc;
-
-    std::cout << advPointer->arrayPosition[1] << " " << advPointer->arrayPosition[0] << std::endl;
+//
+//    std::cout << advPointer->arrayPosition[1] << " " << advPointer->arrayPosition[0] << std::endl;
     
     // 上判定
     if(advPointer->arrayPosition[1] == floorPointer->conf.squareArrayHeight - 1){
@@ -226,6 +225,8 @@ void GameScene::run(WindowClass* window) {
 }
 
 GameScene::~GameScene(){
-    delete advPointer;
     delete floorPointer;
+    delete advPointer;
+    floorPointer = NULL;
+    advPointer = NULL;
 }
