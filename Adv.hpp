@@ -1,4 +1,4 @@
-﻿//
+//
 //  Adv.hpp
 //  OpenGL_Labyrinth
 //

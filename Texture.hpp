@@ -1,4 +1,4 @@
-﻿//
+//
 //  TextureClass.hpp
 //  OpenGL_Labyrinth
 //

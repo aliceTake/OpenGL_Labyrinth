@@ -1,4 +1,4 @@
-﻿//
+//
 //  gameScemeClass.hpp
 //  OpenGL_Labyrinth
 //
@@ -16,7 +16,7 @@
 class GameScene {
     Adv* advPointer;
     MultipleSquare* floorPointer;
-    //    Position* positionArray;
+    bool goalFrag = false;
     
 public:
     GameScene(int mode, int windowWidth, int windowHeight);
@@ -29,6 +29,8 @@ public:
     void keyJudgment(GLFWwindow* window);
     
     void textureChangeByKey(GLFWwindow* window, int count);
+    
+    void goalChack();
     
     void run(WindowClass* window);
 };

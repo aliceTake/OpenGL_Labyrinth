@@ -1,4 +1,4 @@
-﻿//
+//
 //  StartScene.hpp
 //  OpenGL_Labyrinth
 //
@@ -11,13 +11,18 @@
 #include "SquareShape.hpp"
 
 class StartScene {
-public:
-    int gameMode;
+private:
+    GLuint program;
+    GLuint screenProgram;
     SquareShape* screen;
     SquareShape* title;
     SquareShape* easyButton;
     SquareShape* nomalButton;
     SquareShape* hardButton;
+    SquareShape* key;
+    
+public:
+    int gameMode;
     
     StartScene();
     

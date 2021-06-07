@@ -1,4 +1,4 @@
-﻿//
+//
 //  TextureClass.cpp
 //  OpenGL_Labyrinth
 //

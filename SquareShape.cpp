@@ -1,4 +1,4 @@
-﻿//
+//
 //  SquareShape.cpp
 //  OpenGL_Labyrinth
 //
@@ -102,13 +102,12 @@ void SquareShape::changeColor(GLfloat red, GLfloat green, GLfloat blue) {
         color[i].red = red;
         color[i].green = green;
         color[i].blue = blue;
-        
+    }
         bindVao();
         
         glBindBuffer(GL_ARRAY_BUFFER, colorVbo);
         glBufferData(GL_ARRAY_BUFFER, sizeof(color), color, GL_STATIC_DRAW);
         glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, 0);
-    }
 }
 
 void SquareShape::changeAlpha(GLfloat alpha) {

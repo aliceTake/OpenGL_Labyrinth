@@ -1,4 +1,4 @@
-﻿//
+//
 //  Adv.cpp
 //  OpenGL_Labyrinth
 //
@@ -58,15 +58,15 @@ void Adv::createVbo() {
 }
 
 void Adv::advLoadTexture() {
-    this->loadTexture("adv.bmp", 32, 32, true);
-    this->loadTexture("adv1.bmp", 32, 32, true);
-    this->loadTexture("adv2.bmp", 32, 32, true);
-    this->loadTexture("adv3.bmp", 32, 32, true);
-    this->loadTexture("adv4.bmp", 32, 32, true);
-    this->loadTexture("adv5.bmp", 32, 32, true);
-    this->loadTexture("adv6.bmp", 32, 32, true);
-    this->loadTexture("adv7.bmp", 32, 32, true);
-    this->loadTexture("adv8.bmp", 32, 32, true);
+    this->loadTexture("advTexture/adv.bmp", 32, 32, true);
+    this->loadTexture("advTexture/adv1.bmp", 32, 32, true);
+    this->loadTexture("advTexture/adv2.bmp", 32, 32, true);
+    this->loadTexture("advTexture/adv3.bmp", 32, 32, true);
+    this->loadTexture("advTexture/adv4.bmp", 32, 32, true);
+    this->loadTexture("advTexture/adv5.bmp", 32, 32, true);
+    this->loadTexture("advTexture/adv6.bmp", 32, 32, true);
+    this->loadTexture("advTexture/adv7.bmp", 32, 32, true);
+    this->loadTexture("advTexture/adv8.bmp", 32, 32, true);
     this->setTextureLocation(this->program);
 }
 

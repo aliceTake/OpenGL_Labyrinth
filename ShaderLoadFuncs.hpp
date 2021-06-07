@@ -1,4 +1,4 @@
-﻿//
+//
 //  ShaderLoadFuncs.hpp
 //  OpenGL_Labyrinth
 //
