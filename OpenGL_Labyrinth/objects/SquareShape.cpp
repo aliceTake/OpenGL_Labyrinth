@@ -107,6 +107,30 @@ void SquareShape::vertexInit()
     vertex.upperLeft.y  = vertex.upperRight.y;
 }
 
+void SquareShape::changePosition(GLfloat x, GLfloat y) {
+    
+    this->frame.position.x = x;
+    this->frame.position.y = y;
+    vertexInit();
+    
+    bindVao();
+    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+    glBufferData(GL_ARRAY_BUFFER, sizeof (Vertex), &vertex, GL_STATIC_DRAW);
+    glVertexAttribPointer(0, 2, GL_DOUBLE, GL_FALSE, 0, 0);
+}
+
+void SquareShape::changePosition(Position p) {
+    
+    this->frame.position.x = p.x;
+    this->frame.position.y = p.y;
+    vertexInit();
+    
+    bindVao();
+    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+    glBufferData(GL_ARRAY_BUFFER, sizeof (Vertex), &vertex, GL_STATIC_DRAW);
+    glVertexAttribPointer(0, 2, GL_DOUBLE, GL_FALSE, 0, 0);
+}
+
 void SquareShape::changeColor(GLfloat red, GLfloat green, GLfloat blue) {
     for(int i = 0; i < 4; i++){
         color[i].red = red;

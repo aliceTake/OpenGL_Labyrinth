@@ -56,6 +56,9 @@ public:
     
     void setBindTexture(bool set);
     
+    void changePosition(GLfloat x, GLfloat y);
+    void changePosition(Position p);
+    
     void changeColor(GLfloat red, GLfloat green, GLfloat blue);
     
     void changeAlpha(GLfloat alpha);

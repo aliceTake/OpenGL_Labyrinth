@@ -27,13 +27,15 @@ GameScene::GameScene(int mode, int windowWidth, int windowHeight)
     glEnable(GL_BLEND);
 
     advPointer->positionArray = floorPointer->positionArray;
+    
+    advPointer->reloadPosition();
 }
 
 BlockCollision GameScene::hitCheck(){
-    advPointer->reloadPosition();
+//    advPointer->reloadPosition();
     BlockCollision bc;
 //
-//    std::cout << advPointer->arrayPosition[1] << " " << advPointer->arrayPosition[0] << std::endl;
+    std::cout << advPointer->arrayPosition[1] << " " << advPointer->arrayPosition[0] << std::endl;
     
     // 上判定
     if(advPointer->arrayPosition[1] == floorPointer->conf.squareArrayHeight - 1){
@@ -123,27 +125,51 @@ void GameScene::keyJudgment(GLFWwindow* window) {
     // キーボードの状態を調べる
     // WとAキー同時押し,左上移動
     if(glfwGetKey(window, GLFW_KEY_W) != GLFW_RELEASE && glfwGetKey(window, GLFW_KEY_A) != GLFW_RELEASE) {
-        if(bc.up == 0 && bc.down_left == 0) advPointer->move(0);
+        if(bc.up == 0 && bc.down_left == 0) {
+            advPointer->move(0);
+            advPointer->reloadArrayPosition(0);
+        }
         bc = hitCheck();
-        if(bc.left == 0 && bc.up_left == 0) advPointer->move(2);
+        if(bc.left == 0 && bc.up_left == 0) {
+            advPointer->move(2);
+            advPointer->reloadArrayPosition(2);
+        }
     }
     // WとDキー同時押し,右上移動
     else if(glfwGetKey(window, GLFW_KEY_W) != GLFW_RELEASE && glfwGetKey(window, GLFW_KEY_D) != GLFW_RELEASE) {
-        if(bc.up == 0 && bc.down_left == 0) advPointer->move(0);
+        if(bc.up == 0 && bc.down_left == 0){
+            advPointer->move(0);
+            advPointer->reloadArrayPosition(0);
+        }
         bc = hitCheck();
-        if(bc.right == 0 && bc.up_right == 0) advPointer->move(3);
+        if(bc.right == 0 && bc.up_right == 0) {
+            advPointer->move(3);
+            advPointer->reloadArrayPosition(3);
+        }
     }
     // SとAキー同時押し,左下移動
     else if(glfwGetKey(window, GLFW_KEY_S) != GLFW_RELEASE && glfwGetKey(window, GLFW_KEY_A) != GLFW_RELEASE) {
-        if(bc.down == 0 && bc.down_right == 0) advPointer->move(1);
+        if(bc.down == 0 && bc.down_right == 0){
+            advPointer->move(1);
+            advPointer->reloadArrayPosition(1);
+        }
         bc = hitCheck();
-        if(bc.left == 0 && bc.up_left == 0) advPointer->move(2);
+        if(bc.left == 0 && bc.up_left == 0){
+            advPointer->move(2);
+            advPointer->reloadArrayPosition(2);
+        }
     }
     // SとDキー同時押し,右下移動
     else if(glfwGetKey(window, GLFW_KEY_S) != GLFW_RELEASE && glfwGetKey(window, GLFW_KEY_D) != GLFW_RELEASE) {
-        if(bc.down == 0 && bc.down_right == 0) advPointer->move(1);
+        if(bc.down == 0 && bc.down_right == 0){
+            advPointer->move(1);
+            advPointer->reloadArrayPosition(1);
+        }
         bc = hitCheck();
-        if(bc.right == 0 && bc.up_right == 0) advPointer->move(3);
+        if(bc.right == 0 && bc.up_right == 0){
+            advPointer->move(3);
+            advPointer->reloadArrayPosition(3);
+        }
     }
     // WとSキー同時押しで何もしない
     else if(glfwGetKey(window, GLFW_KEY_W) != GLFW_RELEASE && glfwGetKey(window, GLFW_KEY_S) != GLFW_RELEASE) {
@@ -153,19 +179,31 @@ void GameScene::keyJudgment(GLFWwindow* window) {
     }
     // Wキー、上移動
     else if(glfwGetKey(window, GLFW_KEY_W) != GLFW_RELEASE) {
-        if(bc.up == 0 && bc.down_left == 0) advPointer->move(0);
+        if(bc.up == 0 && bc.down_left == 0){
+            advPointer->move(0);
+            advPointer->reloadArrayPosition(0);
+        }
     }
     // Sキー、下移動
     else if(glfwGetKey(window, GLFW_KEY_S) != GLFW_RELEASE) {
-        if(bc.down == 0 && bc.down_right == 0) advPointer->move(1);
+        if(bc.down == 0 && bc.down_right == 0){
+            advPointer->move(1);
+            advPointer->reloadArrayPosition(1);
+        }
     }
     // Aキー、左移動
     else if(glfwGetKey(window, GLFW_KEY_A) != GLFW_RELEASE) {
-        if(bc.left == 0 && bc.up_left == 0) advPointer->move(2);
+        if(bc.left == 0 && bc.up_left == 0){
+            advPointer->move(2);
+            advPointer->reloadArrayPosition(2);
+        }
     }
     // Dキー、右移動
     else if(glfwGetKey(window, GLFW_KEY_D) != GLFW_RELEASE) {
-        if(bc.right == 0 && bc.up_right == 0) advPointer->move(3);
+        if(bc.right == 0 && bc.up_right == 0){
+            advPointer->move(3);
+            advPointer->reloadArrayPosition(3);
+        }
         
     }
 }

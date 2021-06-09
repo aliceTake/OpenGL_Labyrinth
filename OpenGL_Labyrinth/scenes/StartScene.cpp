@@ -77,10 +77,18 @@ int StartScene::run(WindowClass* window) {
     button.createSquare();
     
     int buttonFrag = -1;
-    double x,y;
-    Position mousePosi;
+//    double x,y;
+//    Position mousePosi;
     
-    while (glfwGetKey(window->getWindowInstance(), GLFW_KEY_ESCAPE) != GLFW_RELEASE || buttonFrag == -1) {
+    bool buttonPush = false;
+    
+    
+    const GLfloat keyPosi[3] = {static_cast<GLfloat>(easyButton->frame.position.y  - 0.01),
+                                static_cast<GLfloat>(nomalButton->frame.position.y - 0.01),
+                                static_cast<GLfloat>(hardButton->frame.position.y  - 0.01)};
+    unsigned int keyPosiNum = 0;
+    
+    while (glfwGetKey(window->getWindowInstance(), GLFW_KEY_ESCAPE) == GLFW_RELEASE && buttonFrag == -1) {
         glClear(GL_COLOR_BUFFER_BIT);
         screen->draw();
         title->draw();
@@ -89,30 +97,70 @@ int StartScene::run(WindowClass* window) {
         hardButton->draw();
         key->draw();
         
-        if(glfwGetMouseButton(window->getWindowInstance(), GLFW_MOUSE_BUTTON_1) != GLFW_RELEASE) {
-            glfwGetCursorPos(window->getWindowInstance(), &x, &y);
-            mousePosi.x = static_cast<GLfloat>(x) * 2.0f / WINDOW_WIDTH - 1.0f;
-            mousePosi.y = 1.0f - static_cast<GLfloat>(y) * 2.0f / WINDOW_HEIGHT;
-            buttonFrag = GAME_MODE_EASY;
-            if(mousePosi.x > easyButton->frame.position.x && mousePosi.x < easyButton->frame.position.x + easyButton->frame.size.width &&
-               mousePosi.y > easyButton->frame.position.y && mousePosi.y < easyButton->frame.position.y + easyButton->frame.size.height)
-            {
-                buttonFrag = GAME_MODE_EASY;
+        if(glfwGetKey(window->getWindowInstance(), GLFW_KEY_DOWN) != GLFW_RELEASE) {
+            if(buttonPush == false){
+                keyPosiNum++;
+                keyPosiNum = (3 + keyPosiNum) % 3;
+                key->changePosition(0.1, keyPosi[keyPosiNum]);
+                std::cout << keyPosiNum << std::endl;
+                buttonPush = true;
             }
-            else if(mousePosi.x > nomalButton->frame.position.x && mousePosi.x < nomalButton->frame.position.x + nomalButton->frame.size.width &&
-                    mousePosi.y > nomalButton->frame.position.y && mousePosi.y < nomalButton->frame.position.y + nomalButton->frame.size.height)
-            {
-                buttonFrag = GAME_MODE_NORMAL;
-            }
-            else if(mousePosi.x > hardButton->frame.position.x && mousePosi.x < hardButton->frame.position.x + hardButton->frame.size.width &&
-                    mousePosi.y > hardButton->frame.position.y && mousePosi.y < hardButton->frame.position.y + hardButton->frame.size.height)
-            {
-                buttonFrag = GAME_MODE_HARD;
+        }
+        else if(glfwGetKey(window->getWindowInstance(), GLFW_KEY_UP) != GLFW_RELEASE) {
+            if(buttonPush == false){
+                keyPosiNum--;
+                keyPosiNum = (3 + keyPosiNum) % 3;
+                key->changePosition(0.1, keyPosi[keyPosiNum]);
+                buttonPush = true;
             }
         }
         
+        if(glfwGetKey(window->getWindowInstance(), GLFW_KEY_DOWN) == GLFW_RELEASE && glfwGetKey(window->getWindowInstance(), GLFW_KEY_UP) == GLFW_RELEASE) {
+            buttonPush = false;
+        }
+        
+        if(glfwGetKey(window->getWindowInstance(), GLFW_KEY_ENTER) != GLFW_RELEASE) {
+            switch (keyPosiNum) {
+                case 0:
+                    buttonFrag = GAME_MODE_EASY;
+                    break;
+                case 1:
+                    buttonFrag = GAME_MODE_NORMAL;
+                    break;
+                case 2:
+                    buttonFrag = GAME_MODE_HARD;
+                    break;
+                    
+                default:
+                    buttonFrag = GAME_MODE_EASY;
+                    break;
+            }
+        }
+        // マウスでボタンを押す
+//        if(glfwGetMouseButton(window->getWindowInstance(), GLFW_MOUSE_BUTTON_1) != GLFW_RELEASE) {
+//            glfwGetCursorPos(window->getWindowInstance(), &x, &y);
+//            mousePosi.x = static_cast<GLfloat>(x) * 2.0f / WINDOW_WIDTH - 1.0f;
+//            mousePosi.y = 1.0f - static_cast<GLfloat>(y) * 2.0f / WINDOW_HEIGHT;
+//            buttonFrag = GAME_MODE_EASY;
+//            if(mousePosi.x > easyButton->frame.position.x && mousePosi.x < easyButton->frame.position.x + easyButton->frame.size.width &&
+//               mousePosi.y > easyButton->frame.position.y && mousePosi.y < easyButton->frame.position.y + easyButton->frame.size.height)
+//            {
+//                buttonFrag = GAME_MODE_EASY;
+//            }
+//            else if(mousePosi.x > nomalButton->frame.position.x && mousePosi.x < nomalButton->frame.position.x + nomalButton->frame.size.width &&
+//                    mousePosi.y > nomalButton->frame.position.y && mousePosi.y < nomalButton->frame.position.y + nomalButton->frame.size.height)
+//            {
+//                buttonFrag = GAME_MODE_NORMAL;
+//            }
+//            else if(mousePosi.x > hardButton->frame.position.x && mousePosi.x < hardButton->frame.position.x + hardButton->frame.size.width &&
+//                    mousePosi.y > hardButton->frame.position.y && mousePosi.y < hardButton->frame.position.y + hardButton->frame.size.height)
+//            {
+//                buttonFrag = GAME_MODE_HARD;
+//            }
+//        }
+        
         glfwSwapBuffers(window->getWindowInstance());
-        glfwPollEvents();
+        glfwWaitEvents();
     }
     return buttonFrag;
 }

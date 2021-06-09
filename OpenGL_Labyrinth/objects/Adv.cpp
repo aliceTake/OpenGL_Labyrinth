@@ -99,6 +99,75 @@ void Adv::reloadPosition() {
     }
 }
 
+// 0 上
+// 1 下
+// 2 左
+// 3 右
+
+void Adv::reloadArrayPosition(int direction) {
+    advPosi.x = (this->frame.position.x + location[0]);
+    advPosi.y = (this->frame.position.y + GLfloat(location[1]));
+    
+    if(direction == 0){
+        if(arrayPosition[0] != conf.squareArrayHeight - 2) {
+            for(int i = 0; i < 2; i++){
+                if(GLfloat(positionArray[arrayPosition[1] + i][arrayPosition[0]].y) - ERROR_RANGE <= GLfloat(advPosi.y) &&
+                   GLfloat(this->positionArray[arrayPosition[1] + i + 1][arrayPosition[0]].y) > GLfloat(advPosi.y) + ERROR_RANGE) {
+                    arrayPosition[1] = arrayPosition[1] + i;
+                }
+            }
+        }
+        else if(arrayPosition[1] == conf.squareArrayHeight - 2) {
+            if(GLfloat(positionArray[arrayPosition[1]][arrayPosition[0]].y) - ERROR_RANGE <= GLfloat(advPosi.y) &&
+               GLfloat(this->positionArray[arrayPosition[1]][arrayPosition[0] + 1].y) > GLfloat(advPosi.y) + ERROR_RANGE) {
+                arrayPosition[1] = conf.squareArrayHeight - 2;
+            }
+            else if(GLfloat(this->positionArray[arrayPosition[1]][arrayPosition[0] + 1].y) <= GLfloat(advPosi.y) + ERROR_RANGE) {
+                arrayPosition[1] = conf.squareArrayHeight - 1;
+            }
+        }
+    }
+    else if(direction == 1){
+        if(arrayPosition[1] != 0) {
+            for(int i = 1; i >= 0; i--){
+                if(GLfloat(positionArray[arrayPosition[1] - i][arrayPosition[0]].y) - ERROR_RANGE <= GLfloat(advPosi.y) &&
+                   GLfloat(this->positionArray[arrayPosition[1] - i + 1][arrayPosition[0]].y) > GLfloat(advPosi.y) + ERROR_RANGE) {
+                    arrayPosition[1] = arrayPosition[1] - i;
+                }
+            }
+        }
+    }
+    else if(direction == 2){
+        if(arrayPosition[0] != 0) {
+            for(int i = 1; i >= 0; i--){
+                if(GLfloat(positionArray[arrayPosition[1]][arrayPosition[0] - i].x) - ERROR_RANGE <= GLfloat(advPosi.x) &&
+                   GLfloat(this->positionArray[arrayPosition[1]][arrayPosition[0] - i + 1].x) > GLfloat(advPosi.x) + ERROR_RANGE) {
+                    arrayPosition[0] = arrayPosition[0] - i;
+                }
+            }
+        }
+    }
+    else if(direction == 3){
+        if(arrayPosition[0] != conf.squareArrayWidth - 2) {
+            for(int i = 0; i < 2; i++){
+                if(GLfloat(positionArray[arrayPosition[1]][arrayPosition[0] + 1].x) - ERROR_RANGE <= GLfloat(advPosi.x) &&
+                   GLfloat(this->positionArray[arrayPosition[1]][arrayPosition[0] + i + 1].x) > GLfloat(advPosi.x) + ERROR_RANGE) {
+                    arrayPosition[0] = arrayPosition[0] + i;
+                }
+            }
+        }
+        else if(arrayPosition[0] == conf.squareArrayWidth - 2) {
+            if(GLfloat(positionArray[arrayPosition[1]][arrayPosition[0]].x) - ERROR_RANGE <= GLfloat(advPosi.x) &&
+               GLfloat(this->positionArray[arrayPosition[1]][arrayPosition[0] + 1].x) > GLfloat(advPosi.x) + ERROR_RANGE) {
+                arrayPosition[0] = conf.squareArrayWidth - 2;
+            }
+            else if(GLfloat(this->positionArray[arrayPosition[1]][arrayPosition[0] + 1].x) <= GLfloat(advPosi.x) + ERROR_RANGE) {
+                arrayPosition[0] = conf.squareArrayWidth - 1;
+            }
+        }
+    }
+}
+
 Position* Adv::getAdvPosition() {
     reloadPosition();
     return &advPosi;

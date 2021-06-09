@@ -37,6 +37,7 @@ public:
     void advLoadTexture();
     
     void reloadPosition();
+    void reloadArrayPosition(int direction);
     
     Position* getAdvPosition();
     
