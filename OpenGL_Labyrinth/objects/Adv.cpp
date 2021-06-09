@@ -14,7 +14,7 @@ Adv::Adv(Frame f, ConfigureDefine conf) : SquareShape(f) ,conf(conf)
     advPosi.x = 0.0;
     advPosi.y = 0.0;
     glDeleteProgram(this->program);
-    this->program = loadProgram("advVS.vert", "advFS.frag");
+    this->program = loadProgram("shaders/advVS.vert", "shaders/advFS.frag");
     this->aspectLoc = glGetUniformLocation(this->program, "aspect");
     this->locationLoc = glGetUniformLocation(this->program, "location");
 };
@@ -59,15 +59,15 @@ void Adv::createVbo() {
 }
 
 void Adv::advLoadTexture() {
-    this->loadTexture("advTexture/adv.bmp", 32, 32, true);
-    this->loadTexture("advTexture/adv1.bmp", 32, 32, true);
-    this->loadTexture("advTexture/adv2.bmp", 32, 32, true);
-    this->loadTexture("advTexture/adv3.bmp", 32, 32, true);
-    this->loadTexture("advTexture/adv4.bmp", 32, 32, true);
-    this->loadTexture("advTexture/adv5.bmp", 32, 32, true);
-    this->loadTexture("advTexture/adv6.bmp", 32, 32, true);
-    this->loadTexture("advTexture/adv7.bmp", 32, 32, true);
-    this->loadTexture("advTexture/adv8.bmp", 32, 32, true);
+    this->loadTexture("texture/advTexture/adv.bmp", 32, 32, true);
+    this->loadTexture("texture/advTexture/adv1.bmp", 32, 32, true);
+    this->loadTexture("texture/advTexture/adv2.bmp", 32, 32, true);
+    this->loadTexture("texture/advTexture/adv3.bmp", 32, 32, true);
+    this->loadTexture("texture/advTexture/adv4.bmp", 32, 32, true);
+    this->loadTexture("texture/advTexture/adv5.bmp", 32, 32, true);
+    this->loadTexture("texture/advTexture/adv6.bmp", 32, 32, true);
+    this->loadTexture("texture/advTexture/adv7.bmp", 32, 32, true);
+    this->loadTexture("texture/advTexture/adv8.bmp", 32, 32, true);
     this->setTextureLocation(this->program);
 }
 

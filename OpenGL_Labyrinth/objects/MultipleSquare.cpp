@@ -26,7 +26,7 @@ MultipleSquare::MultipleSquare(Frame f, ConfigureDefine conf)
     multipleVertexInit();
     createpositionArrayVbo(conf.squareArrayHeight, conf.squareArrayWidth);
     glDeleteProgram(this->program);
-    this->program = loadProgram("point.vert", "point.frag");
+    this->program = loadProgram("shaders/point.vert", "shaders/point.frag");
     this->aspectLoc = glGetUniformLocation(this->program, "aspect");
 }
 
@@ -157,15 +157,15 @@ void MultipleSquare::stateInit() {
 int MultipleSquare::mapLoad(const int height, const int width) {
     std::string file;
     if(height == 20){
-        file = "easyMap.txt";
+        file = "texture/easyMap.txt";
     }
     else if(height == 30) {
-        file = "nomalMap.txt";
+        file = "texture/nomalMap.txt";
     }
     else if(height == 40) {
-        file = "hardMap.txt";
+        file = "texture/hardMap.txt";
     }
-    else file = "easyMap.txt";
+    else file = "texture/easyMap.txt";
     
     std::ifstream ifs(file, std::ios::in);
     if(!ifs){
@@ -215,7 +215,7 @@ void MultipleSquare::createStateData() {
 }
 
 void MultipleSquare::floorLoadTexture() {
-    this->loadTexture("floor.bmp", 32, 32, false);
+    this->loadTexture("texture/floor.bmp", 32, 32, false);
     this->setTextureLocation(this->program);
     this->bindTexture(0);
 }

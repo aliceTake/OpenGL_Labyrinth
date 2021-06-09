@@ -9,19 +9,19 @@
 
 
 SquareShape::SquareShape(Frame f)
-: location { 0.0, 0.0 }, fLocation { 0.0, 0.0 }, alpha{0.0, 0.0, 0.0, 0.0}, texureBindFrag(false) , frame(f.size, f.position)  { this->program = loadProgram("object.vert", "object.frag");}
+: location { 0.0, 0.0 }, fLocation { 0.0, 0.0 }, alpha{0.0, 0.0, 0.0, 0.0}, texureBindFrag(false) , frame(f.size, f.position)  { this->program = loadProgram("shaders/object.vert", "shaders/object.frag");}
 
 SquareShape::SquareShape(GLdouble width, GLdouble height, GLdouble x, GLdouble y)
-: location { 0.0, 0.0 }, fLocation { 0.0, 0.0 }, alpha{0.0, 0.0, 0.0, 0.0}, texureBindFrag(false), frame(width, height, x, y) { this->program = loadProgram("object.vert", "object.frag"); }
+: location { 0.0, 0.0 }, fLocation { 0.0, 0.0 }, alpha{0.0, 0.0, 0.0, 0.0}, texureBindFrag(false), frame(width, height, x, y) { this->program = loadProgram("shaders/object.vert", "shaders/object.frag"); }
 
 SquareShape::SquareShape(Size s, Position p)
-: location { 0.0, 0.0 }, fLocation { 0.0, 0.0 }, alpha{0.0, 0.0, 0.0, 0.0}, texureBindFrag(false), frame(s ,p) { this->program = loadProgram("object.vert", "object.frag"); }
+: location { 0.0, 0.0 }, fLocation { 0.0, 0.0 }, alpha{0.0, 0.0, 0.0, 0.0}, texureBindFrag(false), frame(s ,p) { this->program = loadProgram("shaders/object.vert", "shaders/object.frag"); }
 
 SquareShape::SquareShape(Size s, GLdouble x, GLdouble y)
-: location { 0.0, 0.0 }, fLocation { 0.0, 0.0 }, alpha{0.0, 0.0, 0.0, 0.0}, texureBindFrag(false), frame(s, x, y) { this->program = loadProgram("object.vert", "object.frag"); }
+: location { 0.0, 0.0 }, fLocation { 0.0, 0.0 }, alpha{0.0, 0.0, 0.0, 0.0}, texureBindFrag(false), frame(s, x, y) { this->program = loadProgram("shaders/object.vert", "shaders/object.frag"); }
 
 SquareShape::SquareShape(GLdouble width, GLdouble height, Position p)
-: location { 0.0, 0.0 }, fLocation { 0.0, 0.0 }, alpha{0.0, 0.0, 0.0, 0.0}, texureBindFrag(false), frame(width, height, p) { this->program = loadProgram("object.vert", "object.frag"); }
+: location { 0.0, 0.0 }, fLocation { 0.0, 0.0 }, alpha{0.0, 0.0, 0.0, 0.0}, texureBindFrag(false), frame(width, height, p) { this->program = loadProgram("shaders/object.vert", "shaders/object.frag"); }
 
 SquareShape::~SquareShape() {
     glBindVertexArray(0);

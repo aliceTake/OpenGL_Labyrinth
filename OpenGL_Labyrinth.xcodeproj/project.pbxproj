@@ -113,25 +113,30 @@
 				E1E6E3662654D6E1005176A6 /* WindowClass.hpp */,
 				E120DDEB2654D3A900D95D38 /* ShaderLoadFuncs.cpp */,
 				E120DDEC2654D3A900D95D38 /* ShaderLoadFuncs.hpp */,
-				E124C8A92667E4730036C7E6 /* StartScene.cpp */,
-				E124C8AA2667E4730036C7E6 /* StartScene.hpp */,
-				E120DDDB2654D06400D95D38 /* GameSceneClass.cpp */,
-				E120DDDC2654D06400D95D38 /* GameSceneClass.hpp */,
+				E18F1C2B2670C756007428B6 /* shaders */,
+				E18F1C2A2670C737007428B6 /* scenes */,
+				E18F1C282670C6E2007428B6 /* objects */,
+				E18F1C292670C716007428B6 /* texture */,
+			);
+			path = OpenGL_Labyrinth;
+			sourceTree = "<group>";
+		};
+		E18F1C282670C6E2007428B6 /* objects */ = {
+			isa = PBXGroup;
+			children = (
 				E1D6586726654F180011B6EF /* SquareShape.cpp */,
 				E1D6586826654F180011B6EF /* SquareShape.hpp */,
 				E1D6586C26654F610011B6EF /* MultipleSquare.cpp */,
 				E1D6586D26654F610011B6EF /* MultipleSquare.hpp */,
 				E1D6586326654EC30011B6EF /* Adv.cpp */,
 				E1D6586426654EC30011B6EF /* Adv.hpp */,
-				E120DDE32654D29A00D95D38 /* Texture.cpp */,
-				E120DDE42654D29A00D95D38 /* Texture.hpp */,
-				E1D32780261EE38F00CCB9A3 /* advVS.vert */,
-				E1D32781261EE40700CCB9A3 /* advFS.frag */,
-				E17F974B260FCE58008B5BBB /* point.vert */,
-				E17F974C260FCE58008B5BBB /* point.frag */,
-				E1E197702664CA010091E5C9 /* object.vert */,
-				E1E197722664D00F0091E5C9 /* object.frag */,
-				E1E3EEE6266939520067A825 /* noTexture.frag */,
+			);
+			path = objects;
+			sourceTree = "<group>";
+		};
+		E18F1C292670C716007428B6 /* texture */ = {
+			isa = PBXGroup;
+			children = (
 				E15B0810266BE3C00057B2AC /* easyMap.txt */,
 				E15B0812266BEEFA0057B2AC /* nomalMap.txt */,
 				E15B0814266BF00A0057B2AC /* hardMap.txt */,
@@ -139,8 +144,35 @@
 				E1E3EEE4266913670067A825 /* startSceneTexture */,
 				E1769F6026186F1F00158A6E /* floor.bmp */,
 				E12FED36261A80E90002FFAB /* nekoc32.bmp */,
+				E120DDE32654D29A00D95D38 /* Texture.cpp */,
+				E120DDE42654D29A00D95D38 /* Texture.hpp */,
 			);
-			path = OpenGL_Labyrinth;
+			path = texture;
+			sourceTree = "<group>";
+		};
+		E18F1C2A2670C737007428B6 /* scenes */ = {
+			isa = PBXGroup;
+			children = (
+				E124C8A92667E4730036C7E6 /* StartScene.cpp */,
+				E124C8AA2667E4730036C7E6 /* StartScene.hpp */,
+				E120DDDB2654D06400D95D38 /* GameSceneClass.cpp */,
+				E120DDDC2654D06400D95D38 /* GameSceneClass.hpp */,
+			);
+			path = scenes;
+			sourceTree = "<group>";
+		};
+		E18F1C2B2670C756007428B6 /* shaders */ = {
+			isa = PBXGroup;
+			children = (
+				E1D32780261EE38F00CCB9A3 /* advVS.vert */,
+				E1D32781261EE40700CCB9A3 /* advFS.frag */,
+				E17F974B260FCE58008B5BBB /* point.vert */,
+				E17F974C260FCE58008B5BBB /* point.frag */,
+				E1E197702664CA010091E5C9 /* object.vert */,
+				E1E197722664D00F0091E5C9 /* object.frag */,
+				E1E3EEE6266939520067A825 /* noTexture.frag */,
+			);
+			path = shaders;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -27,15 +27,16 @@ int main()
     // ウィンドウが開いている間繰り返す
     while (window.shouldClose() == GL_FALSE)
     {
-        startScene = new StartScene;
-        gameMode = startScene->run(&window);
-        delete startScene;
-        
-        gameScene = new GameScene(gameMode, WINDOW_WIDTH, WINDOW_HEIGHT);
-        gameScene->run(&window);
-        delete gameScene;
-        
-        cout << "true" << endl;
+        if(gameMode == 0){
+            startScene = new StartScene;
+            gameMode = startScene->run(&window);
+            delete startScene;
+        }
+        else if(gameMode == GAME_MODE_EASY || gameMode == GAME_MODE_NORMAL || gameMode == GAME_MODE_HARD) {
+            gameScene = new GameScene(gameMode, WINDOW_WIDTH, WINDOW_HEIGHT);
+            gameMode = gameScene->run(&window);
+            delete gameScene;
+        }
     }
 }
 

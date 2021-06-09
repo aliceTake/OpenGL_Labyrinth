@@ -9,8 +9,8 @@
 
 StartScene::StartScene() {
     
-    program = loadProgram("object.vert", "object.frag");
-    screenProgram = loadProgram("object.vert", "noTexture.frag");
+    program = loadProgram("shaders/object.vert", "shaders/object.frag");
+    screenProgram = loadProgram("shaders/object.vert", "shaders/noTexture.frag");
     
     const GLfloat screenSize = 2.0;
     
@@ -23,7 +23,7 @@ StartScene::StartScene() {
     const GLfloat titleHeght = (screenSize / 8.0) * 3.0;
     title = new SquareShape(Frame(screenSize, titleHeght, -1.0, 0.25));
     title->createSquare();
-    title->loadTexture("startSceneTexture/title.bmp", 800, 300, true);
+    title->loadTexture("texture/startSceneTexture/title.bmp", 800, 300, true);
     title->setTextureLocation(program);
     title->setBindTexture(true);
     title->changeAlpha(1.0);
@@ -35,7 +35,7 @@ StartScene::StartScene() {
 
     easyButton = new SquareShape(Frame(buttonWidth, buttonHeight, buttonX, buttonY));
     easyButton->createSquare();
-    easyButton->loadTexture("startSceneTexture/easy.bmp", 800, 67, true);
+    easyButton->loadTexture("texture/startSceneTexture/easy.bmp", 800, 67, true);
     easyButton->setTextureLocation(program);
     easyButton->setBindTexture(true);
     easyButton->changeAlpha(1.0);
@@ -44,7 +44,7 @@ StartScene::StartScene() {
 
     nomalButton = new SquareShape(Frame(buttonWidth, buttonHeight, buttonX, buttonY * 2.0 - 1.0));
     nomalButton->createSquare();
-    nomalButton->loadTexture("startSceneTexture/nomal.bmp", 800, 67, true);
+    nomalButton->loadTexture("texture/startSceneTexture/nomal.bmp", 800, 67, true);
     nomalButton->setTextureLocation(program);
     nomalButton->setBindTexture(true);
     nomalButton->changeAlpha(1.0);
@@ -52,7 +52,7 @@ StartScene::StartScene() {
 
     hardButton = new SquareShape(Frame(buttonWidth, buttonHeight, buttonX, buttonY - 1.0));
     hardButton->createSquare();
-    hardButton->loadTexture("startSceneTexture/hard.bmp", 800, 67, true);
+    hardButton->loadTexture("texture/startSceneTexture/hard.bmp", 800, 67, true);
     hardButton->setTextureLocation(program);
     hardButton->setBindTexture(true);
     hardButton->changeAlpha(1.0);
@@ -60,7 +60,7 @@ StartScene::StartScene() {
 
     key = new SquareShape(Frame(0.08, 0.1422, 0.1, easyButton->frame.position.y - 0.01));
     key->createSquare();
-    key->loadTexture("startSceneTexture/key.bmp", 32, 32, true);
+    key->loadTexture("texture/startSceneTexture/key.bmp", 32, 32, true);
     key->setTextureLocation(program);
     key->setBindTexture(true);
     key->changeAlpha(1.0);

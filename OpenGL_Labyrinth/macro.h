@@ -17,10 +17,11 @@
 
 #define ERROR_RANGE 0.00001
 
+#define GAME_MODE_START_SCENE 0
 #define GAME_MODE_EASY 1
 #define GAME_MODE_NORMAL 2
 #define GAME_MODE_HARD 3
-
+#define GAME_END 4
 
 #define ADV_SIDE_TEXTURE 0
 #define ADV_FRONT_TEXTURE 1

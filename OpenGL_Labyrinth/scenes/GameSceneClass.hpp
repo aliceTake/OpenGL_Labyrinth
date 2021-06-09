@@ -32,7 +32,7 @@ public:
     
     void goalChack();
     
-    void run(WindowClass* window);
+    int run(WindowClass* window);
 };
 
 #endif /* GameSceneClass_hpp */

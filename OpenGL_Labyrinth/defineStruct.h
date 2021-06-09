@@ -53,7 +53,7 @@ public:
                 this->squareArrayHeight = 40;
                 this->glObjectSize = 0.1;
                 this->goalPosition[0] = 71;
-                this->goalPosition[1] = 37;
+                this->goalPosition[1] = 35;
                 break;
             default:
                 this->squareArrayWidth = 36;

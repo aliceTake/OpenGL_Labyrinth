@@ -198,10 +198,10 @@ void GameScene::goalChack() {
     }
 }
 
-void GameScene::run(WindowClass* window) {
+int GameScene::run(WindowClass* window) {
     unsigned int count = 0;
     
-    while (glfwGetKey(window->getWindowInstance(), GLFW_KEY_X) == GLFW_RELEASE && this->goalFrag == false) {
+    while (glfwGetKey(window->getWindowInstance(), GLFW_KEY_X) == GLFW_RELEASE && glfwGetKey(window->getWindowInstance(), GLFW_KEY_ESCAPE) == GLFW_RELEASE && this->goalFrag == false) {
         count++;
         count = (11 + count) % 11;
         glClear(GL_COLOR_BUFFER_BIT);
@@ -222,6 +222,10 @@ void GameScene::run(WindowClass* window) {
         goalChack();
         std::cout << this->goalFrag << std::endl;
     }
+    if(this->goalFrag == true){
+        return GAME_MODE_START_SCENE;
+    }
+    return GAME_MODE_START_SCENE;
 }
 
 GameScene::~GameScene(){
